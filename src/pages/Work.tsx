@@ -4,6 +4,71 @@ import { useNavigate } from 'react-router-dom';
 import ProjectCard from '../components/ProjectCard';
 import ProjectModal from '../components/ProjectModal';
 
+// Separate component for project cards to avoid hooks in map
+const ProjectCardWithImage = ({ project, idx, navigate }) => {
+  const [loaded, setLoaded] = useState(false);
+  const [imageSrc, setImageSrc] = useState('');
+  
+  // Priority loading for first 3 images
+  const isPriority = idx < 3;
+  
+  // Generate optimized image URLs
+  const generateImageSrc = () => {
+    if (project.image.includes('unsplash.com')) {
+      // Optimize Unsplash images
+      return `${project.image}?w=800&h=600&fit=crop&auto=format&q=80`;
+    } else if (project.image.includes('/assets/')) {
+      // Local assets - use original
+      return project.image;
+    } else {
+      return project.image;
+    }
+  };
+
+  // Set image source on mount
+  React.useEffect(() => {
+    setImageSrc(generateImageSrc());
+  }, [project.image]);
+
+  return (
+    <div
+      key={project.id}
+      className={
+        (idx === 0 || idx === 4)
+          ? 'aspect-[3/4] overflow-hidden w-full h-full relative group cursor-pointer'
+          : 'aspect-[4/3] overflow-hidden w-full h-full relative group cursor-pointer'
+      }
+      onClick={() => navigate(`/project/${project.id}`)}
+      tabIndex={0}
+      role="button"
+      onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') navigate(`/project/${project.id}`); }}
+    >
+      {/* Placeholder skeleton */}
+      {!loaded && (
+        <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-lg"></div>
+      )}
+      
+      <img
+        src={imageSrc}
+        alt={project.title}
+        loading={isPriority ? "eager" : "lazy"}
+        decoding="async"
+        fetchPriority={isPriority ? "high" : "auto"}
+        className={`w-full h-full object-cover rounded-lg transition-all duration-700 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'} group-hover:opacity-0 group-hover:scale-110 group-hover:blur-sm`}
+        onLoad={() => setLoaded(true)}
+        onError={() => {
+          // Fallback to original image if optimized version fails
+          setImageSrc(project.image);
+        }}
+      />
+      {/* Name Only Overlay */}
+      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-white transition-all duration-700 ease-in-out rounded-lg opacity-0 group-hover:opacity-100 focus:opacity-100 transform scale-95 group-hover:scale-100">
+        <span className="text-charcoal-800 text-lg md:text-xl font-semibold text-center px-4 font-playfair transform translate-y-4 group-hover:translate-y-0 transition-transform duration-700 ease-in-out">{project.title}</span>
+      </div>
+    </div>
+  );
+};
+
 const Work = () => {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -16,7 +81,7 @@ const Work = () => {
     {
       id: 1,
       title: 'MANEA – GACHIBOWLI',
-      category: 'ARCHITECTURE',
+      category: 'Architecture',
       image: '/assets/1- MANEA_GACHBOWLI/1- TITLE PAGE.jpg',
       description: 'A sophisticated salon and wellness space featuring contemporary design with warm color palettes, premium materials, and thoughtful spatial planning.',
       images: [
@@ -34,7 +99,7 @@ const Work = () => {
     {
       id: 2,
       title: 'Palliative Care – Hyderabad',
-      category: 'ARCHITECTURE',
+      category: 'Architecture',
       image: '/assets/2- PALLIATIVE CARE/1-TITLE.jpg',
       description: 'A thoughtfully designed healthcare facility focused on comfort and healing, featuring warm neutral tones, natural light, and carefully planned spaces for patients and families.',
       images: [
@@ -52,33 +117,9 @@ const Work = () => {
       location: 'Hyderabad'
     },
     {
-      id: 5,
-      title: 'PRACHI & RACHIT',
-      category: 'Architecture',
-      image: '/assets/PRACHI & RACHIT/Title.jpg.jpg',
-      description: 'A bespoke residential project for Prachi & Rachit, featuring elegant and functional spaces.',
-      images: [
-        '/assets/PRACHI & RACHIT/Title.jpg.jpg',
-        '/assets/PRACHI & RACHIT/1.jpg.jpg',
-         '/assets/PRACHI & RACHIT/3.jpg.jpg',
-        '/assets/PRACHI & RACHIT/4.jpg.jpg',
-        '/assets/PRACHI & RACHIT/5.jpg.jpg',
-        '/assets/PRACHI & RACHIT/6.jpg.jpg',
-        '/assets/PRACHI & RACHIT/7.jpg.jpg',
-        '/assets/PRACHI & RACHIT/8.jpg.jpg',
-        '/assets/PRACHI & RACHIT/9.jpg.jpg',
-        '/assets/PRACHI & RACHIT/10.jpg.jpg',
-        '/assets/PRACHI & RACHIT/11.jpg.jpg',
-        '/assets/PRACHI & RACHIT/12.jpg.jpg',
-        '/assets/PRACHI & RACHIT/13.jpg.jpg',
-        '/assets/PRACHI & RACHIT/14.jpg.jpg',
-      ],
-      location: 'Hyderabad'
-    },
-    {
       id: 3,
       title: 'Santhome Home',
-      category: 'Architecture',
+      category: 'Urban',
       image: '/assets/Chennai Santhome/Tittle.jpg.jpg',
       description: 'A modern home project located in Santhome, Chennai, blending contemporary design with local context.',
       images: [
@@ -95,7 +136,7 @@ const Work = () => {
     {
       id: 4,
       title: 'MANEA – MANIKONDA',
-      category: 'Architecture',
+      category: 'Interior',
       image: '/assets/MANEA_MANIKONDA/Title.jpg.jpg',
       description: 'A contemporary residential project in Manikonda, Hyderabad, designed for modern living with elegant spaces.',
       images: [
@@ -117,24 +158,41 @@ const Work = () => {
       location: 'Manikonda, Hyderabad'
     },
     {
-      id: 6,
-      title: 'Executive Office',
+      id: 5,
+      title: 'PRACHI & RACHIT',
       category: 'Interior',
-      image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop',
-      description: 'Sophisticated workspace design for modern business.'
+      image: '/assets/PRACHI & RACHIT/Title.jpg.jpg',
+      description: 'A bespoke residential project for Prachi & Rachit, featuring elegant and functional spaces.',
+      images: [
+        '/assets/PRACHI & RACHIT/Title.jpg.jpg',
+        '/assets/PRACHI & RACHIT/1.jpg.jpg',
+         '/assets/PRACHI & RACHIT/3.jpg.jpg',
+        '/assets/PRACHI & RACHIT/4.jpg.jpg',
+        '/assets/PRACHI & RACHIT/5.jpg.jpg',
+        '/assets/PRACHI & RACHIT/6.jpg.jpg',
+        '/assets/PRACHI & RACHIT/7.jpg.jpg',
+        '/assets/PRACHI & RACHIT/8.jpg.jpg',
+        '/assets/PRACHI & RACHIT/9.jpg.jpg',
+        '/assets/PRACHI & RACHIT/10.jpg.jpg',
+        '/assets/PRACHI & RACHIT/11.jpg.jpg',
+        '/assets/PRACHI & RACHIT/12.jpg.jpg',
+        '/assets/PRACHI & RACHIT/13.jpg.jpg',
+        '/assets/PRACHI & RACHIT/14.jpg.jpg',
+      ],
+      location: 'Hyderabad'
     },
     {
-      id: 7,
-      title: 'Community Center',
+      id: 6,
+      title: 'Executive Office',
       category: 'Urban',
-      image: 'https://images.unsplash.com/photo-1496307653780-42ee777d4833?w=800&h=600&fit=crop',
-      description: 'Public space design fostering community interaction.'
+      image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop',
+      description: 'Sophisticated workspace design for modern business.'
     }
   ];
 
   const filteredProjects = selectedCategory === 'All' 
     ? projects 
-    : projects.filter(project => project.category === selectedCategory);
+    : projects.filter(project => project.category.toLowerCase() === selectedCategory.toLowerCase());
 
   const scrollToProjects = () => {
     const projectsSection = document.getElementById('projects-section');
@@ -235,10 +293,10 @@ const Work = () => {
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-6 py-2 rounded-full font-inter font-medium transition-all duration-300 ${
+                className={`px-6 py-2 rounded-full font-inter font-medium transition-all duration-500 ease-in-out transform hover:scale-105 ${
                   selectedCategory === category
-                    ? 'bg-charcoal-800 text-cream-50'
-                    : 'bg-cream-100 text-charcoal-600 hover:bg-blush-100'
+                    ? 'bg-charcoal-800 text-cream-50 shadow-lg'
+                    : 'bg-cream-100 text-charcoal-600 hover:bg-blush-100 hover:shadow-md'
                 }`}
               >
                 {category}
@@ -248,78 +306,23 @@ const Work = () => {
 
           {/* Responsive Featured Projects Section - 2 rows, 3 cols, no vertical gap, responsive, with overlays */}
           <div className="max-w-screen-xl mx-auto px-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 grid-rows-2 auto-rows-[1fr] gap-4 items-stretch">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 grid-rows-2 auto-rows-[1fr] gap-4 items-stretch transition-all duration-700 ease-in-out">
               {/* Row 1 */}
-              {projects.slice(0, 6).map((project, idx) => {
-                const [loaded, setLoaded] = useState(false);
-                const [imageSrc, setImageSrc] = useState('');
-                
-                // Priority loading for first 3 images
-                const isPriority = idx < 3;
-                
-                // Generate optimized image URLs
-                const generateImageSrc = () => {
-                  if (project.image.includes('unsplash.com')) {
-                    // Optimize Unsplash images
-                    return `${project.image}?w=800&h=600&fit=crop&auto=format&q=80`;
-                  } else if (project.image.includes('/assets/')) {
-                    // Local assets - use original
-                    return project.image;
-                  } else {
-                    return project.image;
-                  }
-                };
-
-                // Set image source on mount
-                React.useEffect(() => {
-                  setImageSrc(generateImageSrc());
-                }, [project.image]);
-
-                return (
-                  <div
-                    key={project.id}
-                    className={
-                      (idx === 0 || idx === 4)
-                        ? 'aspect-[3/4] overflow-hidden w-full h-full relative group cursor-pointer'
-                        : 'aspect-[4/3] overflow-hidden w-full h-full relative group cursor-pointer'
-                    }
-                    onClick={() => navigate(`/project/${project.id}`)}
-                    tabIndex={0}
-                    role="button"
-                    onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') navigate(`/project/${project.id}`); }}
-                  >
-                    {/* Placeholder skeleton */}
-                    {!loaded && (
-                      <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-lg"></div>
-                    )}
-                    
-                    <img
-                      src={imageSrc}
-                      alt={project.title}
-                      loading={isPriority ? "eager" : "lazy"}
-                      decoding="async"
-                      fetchPriority={isPriority ? "high" : "auto"}
-                      className={`w-full h-full object-cover rounded-lg transition-all duration-700 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'} group-hover:opacity-0 group-hover:scale-110 group-hover:blur-sm`}
-                      onLoad={() => setLoaded(true)}
-                      onError={() => {
-                        // Fallback to original image if optimized version fails
-                        setImageSrc(project.image);
-                      }}
-                    />
-                    {/* Name Only Overlay */}
-                    <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-white transition-all duration-700 ease-in-out rounded-lg opacity-0 group-hover:opacity-100 focus:opacity-100 transform scale-95 group-hover:scale-100">
-                      <span className="text-charcoal-800 text-lg md:text-xl font-semibold text-center px-4 font-playfair transform translate-y-4 group-hover:translate-y-0 transition-transform duration-700 ease-in-out">{project.title}</span>
-                    </div>
-                  </div>
-                );
-              })}
+              {filteredProjects.slice(0, 6).map((project, idx) => (
+                <ProjectCardWithImage 
+                  key={project.id}
+                  project={project}
+                  idx={idx}
+                  navigate={navigate}
+                />
+              ))}
             </div>
           </div>
 
           {/* Any remaining projects in a simple grid */}
-          {projects.length > 9 && (
+          {filteredProjects.length > 9 && (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-6">
-              {projects.slice(9).map((project, index) => (
+              {filteredProjects.slice(9).map((project, index) => (
                 <ProjectCard
                   key={project.id}
                   project={project}

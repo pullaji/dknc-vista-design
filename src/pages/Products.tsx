@@ -13,7 +13,7 @@ const Products = () => {
       name: 'Minimal Dining Table',
       category: 'Furniture',
       price: 'Enquire',
-      image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=400&fit=crop',
+      image: '/assets/products/chair.jpg',
       description: 'Handcrafted solid oak dining table with clean lines and natural finish.'
     },
     {
@@ -21,7 +21,7 @@ const Products = () => {
       name: 'Pendant Light Series',
       category: 'Lighting',
       price: 'Enquire',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop',
+      image: '/assets/products/light.jpg',
       description: 'Architectural pendant lights with brass accents and warm LED technology.'
     },
     {
@@ -29,7 +29,7 @@ const Products = () => {
       name: 'Ceramic Vase Collection',
       category: 'Decor',
       price: 'Enquire',
-      image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=400&fit=crop',
+      image: '/assets/products/wall.jpg',
       description: 'Hand-thrown ceramic vessels in matte earth tones.'
     },
     {
@@ -45,7 +45,7 @@ const Products = () => {
       name: 'Floor Lamp',
       category: 'Lighting',
       price: 'Enquire',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop',
+      image: '/assets/products/flloor.jpg',
       description: 'Minimalist floor lamp with adjustable height and dimming function.'
     },
     {
@@ -53,7 +53,7 @@ const Products = () => {
       name: 'Wall Art Series',
       category: 'Decor',
       price: 'Enquire',
-      image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=400&fit=crop',
+      image: '/assets/products/wallart_.jpg',
       description: 'Abstract compositions inspired by architectural forms.'
     }
   ];
