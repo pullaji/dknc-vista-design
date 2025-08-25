@@ -173,9 +173,9 @@ const Work = () => {
   ].filter(Boolean);
 
   return (
-    <div className="pt-0">
+    <div className="pt-0 md:pt-0">
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative h-screen flex items-center justify-center overflow-hidden pt-14 md:pt-0">
         {/* Background Image */}
         <div 
           className="absolute inset-0 z-0 brightness-[0.8]"

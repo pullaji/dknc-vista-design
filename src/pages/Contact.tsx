@@ -30,9 +30,8 @@ const Contact = () => {
                 <div>
                   <h3 className="font-inter font-semibold text-charcoal-800 mb-2">Address</h3>
                   <p className="text-charcoal-600 leading-relaxed">
-                    123 Design District<br />
-                    Creative Quarter, Suite 400<br />
-                    New York, NY 10001
+                    Jubilee Hills 1 main road, Hyderabad<br />
+                    Telangana, India 500033
                   </p>
                 </div>
                 
@@ -40,12 +39,12 @@ const Contact = () => {
                   <h3 className="font-inter font-semibold text-charcoal-800 mb-2">Contact</h3>
                   <p className="text-charcoal-600">
                     <a href="mailto:hello@dknc.studio" className="hover:text-blush-500 transition-colors">
-                      hello@dknc.studio
+                      divyakruthi@gmail.com
                     </a>
                   </p>
                   <p className="text-charcoal-600">
                     <a href="tel:+1234567890" className="hover:text-blush-500 transition-colors">
-                      +1 (234) 567-8900
+                     +91 7799391131
                     </a>
                   </p>
                 </div>
