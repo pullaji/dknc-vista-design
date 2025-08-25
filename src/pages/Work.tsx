@@ -206,7 +206,10 @@ const Work = () => {
             >
               Explore Our Work
             </button>
-            <button className="border-2 border-cream-50 text-cream-50 px-10 py-4 rounded-full font-inter font-medium text-lg transition-all duration-300 hover:bg-cream-50 hover:text-charcoal-800 hover:shadow-xl hover:scale-105">
+            <button 
+              onClick={() => navigate('/contact')}
+              className="border-2 border-cream-50 text-cream-50 px-10 py-4 rounded-full font-inter font-medium text-lg transition-all duration-300 hover:bg-cream-50 hover:text-charcoal-800 hover:shadow-xl hover:scale-105"
+            >
               Contact Us
             </button>
           </div>
