@@ -1,122 +1,144 @@
+import React from 'react';
 
 const Media = () => {
-  const pressMentions = [
+  const mediaMentions = [
     {
-      publication: 'Architectural Digest',
-      title: 'Rising Stars in Contemporary Architecture',
-      year: '2024',
-      description: 'DKnC featured as one of the most promising emerging studios.',
-      logo: 'https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=100&h=60&fit=crop'
+      id: 1,
+      title: "This Hyderabad holiday home is immersed in a mango plantation",
+      description: "Spacefiction Studio creates a contemporary home that seamlessly blends with nature.",
+      publication: "Architectural Digest",
+      date: "September 2021",
+      type: "WEB",
+      mainImage: "/assets/1- MANEA_GACHBOWLI/5.jpg",
+      category: "Residential"
     },
     {
-      publication: 'Dezeen',
-      title: 'Contextual Design Approach Transforms Urban Living',
-      year: '2023',
-      description: 'In-depth feature on our residential project methodology.',
-      logo: 'https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=100&h=60&fit=crop'
+      id: 2,
+      title: "ID HONOURS 2021 - CURO2",
+      description: "Recognized for excellence in interior design and architectural innovation.",
+      publication: "ID HONOURS",
+      date: "March 2021",
+      type: "WEB",
+      mainImage: "/assets/2- PALLIATIVE CARE/1-TITLE.jpg",
+      category: "Awards"
     },
     {
-      publication: 'Interior Design Magazine',
-      title: 'The New Minimalism: DKnC\'s Interior Philosophy',
-      year: '2023',
-      description: 'Exploring our approach to interior spaces and material selection.',
-      logo: 'https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=100&h=60&fit=crop'
-    }
-  ];
-
-  const awards = [
-    {
-      title: 'AIA Design Excellence Award',
-      year: '2024',
-      project: 'Modern Residence'
+      id: 3,
+      title: "Brick Mask House / Spacefiction Studio",
+      description: "Best Architectural Drawings - A contemporary residence showcasing innovative design.",
+      publication: "Archdaily",
+      date: "April 2021",
+      type: "WEB",
+      mainImage: "/assets/Chennai Santhome/2.jpg.jpg",
+      category: "Architecture"
     },
     {
-      title: 'Interior Design Best of Year',
-      year: '2023',
-      project: 'Urban Loft Interior'
+      id: 4,
+      title: "MGB Headquarters / Spacefiction Studio",
+      description: "Corporate headquarters featuring sustainable design and modern aesthetics.",
+      publication: "Archdaily",
+      date: "July 2021",
+      type: "WEB",
+      mainImage: "/assets/MANEA_MANIKONDA/Title.jpg.jpg",
+      category: "Commercial"
     },
     {
-      title: 'Sustainable Design Recognition',
-      year: '2023',
-      project: 'Community Center'
+      id: 5,
+      title: "THE VIVEK EADARA SHOW #4 SEASON 1 EPISODE 4",
+      description: "IN CONVERSATION WITH BABA SASHANK & VINDHYA GUDURU - ARCHITECTURE PODCAST SERIES",
+      publication: "YouTube",
+      date: "March 2021",
+      type: "WEB",
+      mainImage: "/assets/PRACHI & RACHIT/Title.jpg.jpg",
+      category: "Podcast"
+    },
+    {
+      id: 6,
+      title: "Looking Inwards - Contextual Residence Hyderabad",
+      description: "A residential project that reflects the local context and cultural heritage.",
+      publication: "Design Pataki",
+      date: "June 2021",
+      type: "WEB",
+      mainImage: "/assets/1- MANEA_GACHBOWLI/1- TITLE PAGE.jpg",
+      category: "Residential"
+    },
+    {
+      id: 7,
+      title: "MGB Headquarters - Eenadu Feature",
+      description: "Print media coverage of our corporate headquarters project.",
+      publication: "Eenadu",
+      date: "July 2020",
+      type: "PRINT",
+      mainImage: "/assets/2- PALLIATIVE CARE/2.jpg",
+      category: "Commercial"
+    },
+    {
+      id: 8,
+      title: "Brick Mask House - Design Pataki",
+      description: "Featured project showcasing contemporary residential architecture.",
+      publication: "Design Pataki",
+      date: "June 2021",
+      type: "WEB",
+      mainImage: "/assets/Chennai Santhome/1.jpg.jpg",
+      category: "Residential"
     }
   ];
 
   return (
     <div className="pt-20">
       {/* Header */}
-      <section className="py-20 px-6 bg-gradient-to-br from-cream-50 to-blush-50">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="font-playfair text-5xl font-bold text-charcoal-800 mb-8">
+      <section className="relative py-16 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <h1 className="font-playfair text-5xl md:text-6xl font-bold text-charcoal-800 mb-6 text-center">
             Media & Recognition
           </h1>
-          <p className="text-xl text-charcoal-600 leading-relaxed">
-            Our work has been recognized by leading publications and institutions 
-            in architecture and design.
+          <p className="text-lg text-charcoal-600 max-w-3xl mx-auto text-center leading-relaxed">
+            Our work has been featured in leading publications and recognized by prestigious institutions worldwide.
           </p>
         </div>
       </section>
 
-      {/* Press Mentions */}
-      <section className="py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="font-playfair text-3xl font-semibold text-charcoal-800 mb-12 text-center">
-            Press Mentions
-          </h2>
-          
-          <div className="space-y-8">
-            {pressMentions.map((mention, index) => (
-              <div key={index} className="bg-white rounded-lg p-8 shadow-sm hover:shadow-md transition-shadow duration-300">
-                <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
-                  <div className="flex-shrink-0">
-                    <img
-                      src={mention.logo}
-                      alt={mention.publication}
-                      className="w-24 h-16 object-cover rounded grayscale"
+      {/* Media Grid */}
+      <section className="px-6 pb-20">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {mediaMentions.map((item, index) => (
+              <div key={item.id} className="bg-white rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden">
+                                 {/* Main Image */}
+                 <div className="relative h-48 overflow-hidden">
+                   <img
+                     src={item.mainImage}
+                     alt={item.title}
+                     className="w-full h-full object-cover"
                     />
                   </div>
-                  <div className="flex-1">
-                    <h3 className="font-playfair text-xl font-semibold text-charcoal-800 mb-2">
-                      {mention.title}
-                    </h3>
-                    <p className="text-blush-500 font-inter font-medium mb-2">
-                      {mention.publication} • {mention.year}
-                    </p>
-                    <p className="text-charcoal-600 text-sm">
-                      {mention.description}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Awards */}
-      <section className="py-20 px-6 bg-blush-50">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="font-playfair text-3xl font-semibold text-charcoal-800 mb-12 text-center">
-            Awards & Recognition
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {awards.map((award, index) => (
-              <div key={index} className="bg-white rounded-lg p-8 text-center shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
-                <div className="w-16 h-16 bg-blush-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <svg className="w-8 h-8 text-blush-500" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
+                {/* Content */}
+                <div className="p-6">
+                  {/* Publication and Date */}
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-blush-500 font-inter font-semibold text-sm uppercase tracking-wide">
+                      {item.publication}
+                    </span>
+                    <span className="text-charcoal-500 text-sm">
+                      {item.date}
+                    </span>
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="font-playfair text-lg font-semibold text-charcoal-800 mb-3 leading-tight">
+                    {item.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-charcoal-600 text-sm leading-relaxed mb-4">
+                    {item.description}
+                  </p>
+
+                  
+
+                  
                 </div>
-                <h3 className="font-playfair text-lg font-semibold text-charcoal-800 mb-2">
-                  {award.title}
-                </h3>
-                <p className="text-blush-500 font-inter font-medium mb-2">
-                  {award.year}
-                </p>
-                <p className="text-charcoal-600 text-sm">
-                  {award.project}
-                </p>
               </div>
             ))}
           </div>
@@ -127,3 +149,4 @@ const Media = () => {
 };
 
 export default Media;
+
