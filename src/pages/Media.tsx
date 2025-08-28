@@ -5,11 +5,11 @@ const Media = () => {
     {
       id: 1,
       title: "This Hyderabad holiday home is immersed in a mango plantation",
-      description: "Spacefiction Studio creates a contemporary home that seamlessly blends with nature.",
+      description: "Dknc Studio creates a contemporary home that seamlessly blends with nature.",
       publication: "Architectural Digest",
       date: "September 2021",
       type: "WEB",
-      mainImage: "/assets/1- MANEA_GACHBOWLI/5.jpg",
+      mainImage: "/assets/Chennai Santhome/6.jpg.jpg",
       category: "Residential"
     },
     {
@@ -24,7 +24,7 @@ const Media = () => {
     },
     {
       id: 3,
-      title: "Brick Mask House / Spacefiction Studio",
+      title: "Brick Mask House / DKNC Studio",
       description: "Best Architectural Drawings - A contemporary residence showcasing innovative design.",
       publication: "Archdaily",
       date: "April 2021",
@@ -34,8 +34,8 @@ const Media = () => {
     },
     {
       id: 4,
-      title: "MGB Headquarters / Spacefiction Studio",
-      description: "Corporate headquarters featuring sustainable design and modern aesthetics.",
+      title: "MGB Headquarters / Dknc Studio",
+      description: "Office Headquarters featuring sustainable design and modern aesthetics.",
       publication: "Archdaily",
       date: "July 2021",
       type: "WEB",
@@ -44,9 +44,9 @@ const Media = () => {
     },
     {
       id: 5,
-      title: "THE VIVEK EADARA SHOW #4 SEASON 1 EPISODE 4",
-      description: "IN CONVERSATION WITH BABA SASHANK & VINDHYA GUDURU - ARCHITECTURE PODCAST SERIES",
-      publication: "YouTube",
+      title: "Future ready community for residents",
+      description: "Hybrid Form - Intersection of three themed neighborhoods",
+      publication: "Archdaily",
       date: "March 2021",
       type: "WEB",
       mainImage: "/assets/PRACHI & RACHIT/Title.jpg.jpg",
@@ -64,9 +64,9 @@ const Media = () => {
     },
     {
       id: 7,
-      title: "MGB Headquarters - Eenadu Feature",
+      title: "MGB house  - Feature",
       description: "Print media coverage of our corporate headquarters project.",
-      publication: "Eenadu",
+      publication: "Archdaily",
       date: "July 2020",
       type: "PRINT",
       mainImage: "/assets/2- PALLIATIVE CARE/2.jpg",
