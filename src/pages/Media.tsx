@@ -5,7 +5,7 @@ const Media = () => {
     {
       id: 1,
       title: "This Hyderabad holiday home is immersed in a mango plantation",
-      description: "Dknc Studio creates a contemporary home that seamlessly blends with nature.",
+      description: "Dknc Studio creates a santhome home that seamlessly blends with nature.",
       publication: "Architectural Digest",
       date: "September 2021",
       type: "WEB",
@@ -14,7 +14,7 @@ const Media = () => {
     },
     {
       id: 2,
-      title: "ID HONOURS 2021 - CURO2",
+      title: "Palliative Care",
       description: "Recognized for excellence in interior design and architectural innovation.",
       publication: "ID HONOURS",
       date: "March 2021",
@@ -24,7 +24,7 @@ const Media = () => {
     },
     {
       id: 3,
-      title: "Brick Mask House / DKNC Studio",
+      title: "Santhome Home / DKNC Studio",
       description: "Best Architectural Drawings - A contemporary residence showcasing innovative design.",
       publication: "Archdaily",
       date: "April 2021",
@@ -44,7 +44,7 @@ const Media = () => {
     },
     {
       id: 5,
-      title: "Future ready community for residents",
+      title: "Prachi & Rachit for residents",
       description: "Hybrid Form - Intersection of three themed neighborhoods",
       publication: "Archdaily",
       date: "March 2021",
@@ -74,7 +74,7 @@ const Media = () => {
     },
     {
       id: 8,
-      title: "Brick Mask House - Design Pataki",
+      title: " Design Pataki",
       description: "Featured project showcasing contemporary residential architecture.",
       publication: "Design Pataki",
       date: "June 2021",

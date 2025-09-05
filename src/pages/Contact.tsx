@@ -39,7 +39,7 @@ const Contact = () => {
                   <h3 className="font-inter font-semibold text-charcoal-800 mb-2">Contact</h3>
                   <p className="text-charcoal-600">
                     <a href="mailto:hello@dknc.studio" className="hover:text-blush-500 transition-colors">
-                      divyakruthi@gmail.com
+                      Designs@divyakruthi.com
                     </a>
                   </p>
                   <p className="text-charcoal-600">
@@ -51,9 +51,9 @@ const Contact = () => {
                 
                 <div>
                   <h3 className="font-inter font-semibold text-charcoal-800 mb-2">Follow Us</h3>
-                  <a href="#" className="inline-flex items-center text-charcoal-600 hover:text-blush-500 transition-colors">
+                  <a href="https://www.instagram.com/divyakruthidesigns" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-charcoal-600 hover:text-blush-500 transition-colors">
                     <Instagram size={20} className="mr-2" />
-                    @dknc.studio
+                    divyakruthidesigns
                   </a>
                 </div>
               </div>

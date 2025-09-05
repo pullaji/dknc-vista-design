@@ -10,7 +10,7 @@ const Profile = () => {
     {
       id: 'chaitanya',
       name: 'CHAITANYA GARIKIPATI',
-      title: 'PRINCIPAL ARCHITECT',
+      title: 'CO-FOUNDER & PRINCIPAL ARCHITECT',
       image: '/assets/Profiles/chaitanya.jpg',
       studioName: 'DKNC STUDIO',
       founded: '2018',
@@ -51,7 +51,7 @@ const Profile = () => {
     {
       id: 'divya',
       name: 'DIVYA KRUTHI',
-      title: 'PRINCIPAL ARCHITECT & CO-FOUNDER',
+      title: 'FOUNDER & PRINCIPAL ARCHITECT',
       image: '/assets/Profiles/divya.jpg',
       studioName: 'DKNC STUDIO',
       founded: '2018',
@@ -76,8 +76,8 @@ const Profile = () => {
         'Indian Institute of Interior Designers (IIID), Hyderabad Chapter'
       ],
       contact: {
-        email: 'divya.kruthi@dnc-architects.com',
-        phone: '+1 (555) 345-6789',
+        email: 'Designs@divyakruthi.com',
+        phone: '+91 7799391131',
         linkedin: 'https://linkedin.com/in/divya-kruthi'
       }
     }
@@ -160,14 +160,6 @@ const Profile = () => {
               <h3 className="text-lg sm:text-xl font-bold text-charcoal-800 mb-4 text-center transition-all duration-500 ease-in-out group-hover:text-blush-600">
                 DKNC STUDIO PROFILE:
               </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="transition-all duration-300 ease-in-out hover:translate-x-1">
-                  <span className="font-semibold">Founded:</span> {member.founded}
-                </div>
-                <div className="transition-all duration-300 ease-in-out hover:translate-x-1">
-                  <span className="font-semibold">Founder & Principal Architect:</span> {member.founder}
-                </div>
-              </div>
             </div>
 
             {/* Company Overview */}

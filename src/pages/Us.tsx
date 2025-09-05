@@ -7,28 +7,12 @@ const Us = () => {
   const navigate = useNavigate();
   const teamMembers = [
     {
-      id: 'chaitanya',
-      name: 'Chaitanya Garikipati',
-      role: 'Interior Design Director',
-      image: '/assets/Profiles/chaitanya.jpg',
-      bio: 'Chaitanya brings a refined aesthetic sensibility to our residential and commercial interior projects, creating spaces that inspire and endure.',
-      email: 'chaitanya.garikipati@dnc-architects.com',
-      phone: '+1 (555) 234-5678',
-      linkedin: 'https://linkedin.com/in/chaitanya-garikipati',
-      experience: '12 years specializing in luxury residential and boutique commercial interiors. At DKNC STUDIO, his responsibilities included managing design consultants, contractors, and authorities to achieve set outcomes. Key tasks involved contract negotiation, budgeting, resource allocation, risk mitigation, and compliance with standards. Additionally, ensured project timelines, quality benchmarks, and smooth project closure. His approach integrates environmental sensitivity, ensuring that designs are not only aesthetically compelling but also aligned with ecological and sustainable principles.',
-      education: 'Bachelor of Fine Arts in Interior Design, Parsons School of Design\nCertification in Sustainable Interior Design',
-      specialties: ['Luxury Residential', 'Boutique Commercial', 'Color Theory', 'Furniture Design', 'Project Management', 'Contract Negotiation', 'Resource Allocation', 'Risk Mitigation', 'Environmental Design'],
-      projects: ['Penthouse Interior, Manhattan', 'Boutique Hotel Lobby, Miami', 'Private Residence, Beverly Hills'],
-      location: 'Los Angeles, CA',
-      yearsExperience: 12
-    },
-    {
       id: 'divya',
       name: 'Divya Kruthi',
-      role: 'Principal Architect & Co-Founder',
+      role: 'Principal Architect & Founder',
       image: divyaImage,
       bio: 'Divya Kruthi is an accomplished architect with over 11 years of professional experience, co-founding DKNC Studio in 2018. She is a forward-thinking architectural firm that has been redefining spaces through innovative design, sustainable practices, and community-driven solutions. Divya is highly regarded for her meticulous attention to detail and unwavering commitment to creating structures that integrate seamlessly with their surrounding environments.',
-      email: 'divya.kruthi@dnc-architects.com',
+      email: 'Designs@divyakruthi.com',
       phone: '+1 (555) 345-6789',
       linkedin: 'https://linkedin.com/in/divya-kruthi',
       experience: 'Over 11 years of professional experience in architecture. After graduation, Divya began working for some of the most renowned architecture firms in the industry, honing her skills and building a diverse portfolio. Since 2018, she has been successfully expanding her architectural practice, DKNC Studio, committed to exploring new frontiers in design and sustainability. Her work spans commercial buildings, residential homes, hospitality projects, and public spaces.',
@@ -38,6 +22,22 @@ const Us = () => {
       location: 'Hyderabad, India',
       yearsExperience: 11,
       achievements: ['Named among IGEN\'s top 50 under 40', 'Two-time recipient of IIID awards', 'Awarded two gold medals for academic excellence', 'Co-founded DKNC Studio in 2018', 'Successfully executed diverse range of projects', 'Volunteered for NGO school rebuilding in Nepal', 'Member of Council of Architects (COA), New Delhi', 'Member of Indian Institute of Architects (IIA), Hyderabad Chapter', 'Member of Indian Institute of Interior Designers (IIID), Hyderabad Chapter']
+    },
+    {
+      id: 'chaitanya',
+      name: 'Chaitanya Garikipati',
+      role: 'Principal Architect & Co-Founder',
+      image: '/assets/Profiles/chaitanya.jpg',
+      bio: 'Chaitanya brings a refined aesthetic sensibility to our residential and commercial interior projects, creating spaces that inspire and endure.',
+      email: 'Designs@divyakruthi.com',
+      phone: '+1 (555) 234-5678',
+      linkedin: 'https://linkedin.com/in/chaitanya-garikipati',
+      experience: '12 years specializing in luxury residential and boutique commercial interiors. At DKNC STUDIO, his responsibilities included managing design consultants, contractors, and authorities to achieve set outcomes. Key tasks involved contract negotiation, budgeting, resource allocation, risk mitigation, and compliance with standards. Additionally, ensured project timelines, quality benchmarks, and smooth project closure. His approach integrates environmental sensitivity, ensuring that designs are not only aesthetically compelling but also aligned with ecological and sustainable principles.',
+      education: 'Bachelor of Fine Arts in Interior Design, Parsons School of Design\nCertification in Sustainable Interior Design',
+      specialties: ['Luxury Residential', 'Boutique Commercial', 'Color Theory', 'Furniture Design', 'Project Management', 'Contract Negotiation', 'Resource Allocation', 'Risk Mitigation', 'Environmental Design'],
+      projects: ['Penthouse Interior, Manhattan', 'Boutique Hotel Lobby, Miami', 'Private Residence, Beverly Hills'],
+      location: 'Los Angeles, CA',
+      yearsExperience: 12
     }
   ];
 

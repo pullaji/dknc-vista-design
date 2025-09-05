@@ -8,7 +8,7 @@ const Project = () => {
   const projects = [
     {
       id: 1,
-      title: 'MANEA – GACHIBOWLI',
+      title: 'MANEA',
       category: 'ARCHITECTURE',
       image: '/assets/1- MANEA_GACHBOWLI/1- TITLE PAGE.jpg',
       description: 'A sophisticated salon and wellness space featuring contemporary design with warm color palettes, premium materials, and thoughtful spatial planning.',
@@ -28,7 +28,7 @@ const Project = () => {
     },
     {
       id: 2,
-      title: 'Palliative Care – Hyderabad',
+      title: 'Palliative Care',
       category: 'ARCHITECTURE',
       image: '/assets/2- PALLIATIVE CARE/1-TITLE.jpg',
       description: 'A thoughtfully designed healthcare facility focused on comfort and healing, featuring warm neutral tones, natural light, and carefully planned spaces for patients and families.',
@@ -67,7 +67,7 @@ const Project = () => {
     },
     {
       id: 4,
-      title: 'MANEA – MANIKONDA',
+      title: 'MANEA MANIKONDA',
       category: 'Architecture',
       image: '/assets/MANEA_MANIKONDA/Title.jpg.jpg',
       description: 'A contemporary residential project in Manikonda, Hyderabad, designed for modern living with elegant spaces.',
