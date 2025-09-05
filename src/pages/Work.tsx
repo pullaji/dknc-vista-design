@@ -3,32 +3,23 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProjectCard from '../components/ProjectCard';
 import ProjectModal from '../components/ProjectModal';
+import { useImageLoader } from '../hooks/useImageLoader';
 
 // Separate component for project cards to avoid hooks in map
-const ProjectCardWithImage = ({ project, idx, navigate }) => {
-  const [loaded, setLoaded] = useState(false);
-  const [imageSrc, setImageSrc] = useState('');
-  
-  // Priority loading for first 3 images
-  const isPriority = idx < 3;
-  
-  // Generate optimized image URLs
-  const generateImageSrc = () => {
-    if (project.image.includes('unsplash.com')) {
-      // Optimize Unsplash images
-      return `${project.image}?w=800&h=600&fit=crop&auto=format&q=80`;
-    } else if (project.image.includes('/assets/')) {
-      // Local assets - use original
-      return project.image;
-    } else {
-      return project.image;
-    }
-  };
+interface ProjectCardWithImageProps {
+  project: any;
+  idx: number;
+  navigate: any;
+}
 
-  // Set image source on mount
-  React.useEffect(() => {
-    setImageSrc(generateImageSrc());
-  }, [project.image]);
+const ProjectCardWithImage = React.memo(({ project, idx, navigate }: ProjectCardWithImageProps) => {
+  const { imageSrc, loaded, handleLoad, handleError } = useImageLoader({
+    src: project.image,
+    isPriority: idx < 3,
+    width: 800,
+    height: 600,
+    quality: 75
+  });
 
   return (
     <div
@@ -51,15 +42,12 @@ const ProjectCardWithImage = ({ project, idx, navigate }) => {
       <img
         src={imageSrc}
         alt={project.title}
-        loading={isPriority ? "eager" : "lazy"}
+        loading={idx < 3 ? "eager" : "lazy"}
         decoding="async"
-        {...(isPriority ? { fetchpriority: "high" } : {})}
-        className={`w-full h-full object-cover rounded-lg transition-all duration-700 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'} group-hover:opacity-0 group-hover:scale-110 group-hover:blur-sm`}
-        onLoad={() => setLoaded(true)}
-        onError={() => {
-          // Fallback to original image if optimized version fails
-          setImageSrc(project.image);
-        }}
+        {...(idx < 3 ? { fetchpriority: "high" } : {})}
+        className={`w-full h-full object-cover rounded-lg transition-all duration-500 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'} group-hover:opacity-0 group-hover:scale-105`}
+        onLoad={handleLoad}
+        onError={handleError}
       />
       {/* Name Only Overlay */}
       <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-white transition-all duration-700 ease-in-out rounded-lg opacity-0 group-hover:opacity-100 focus:opacity-100 transform scale-95 group-hover:scale-100">
@@ -67,7 +55,7 @@ const ProjectCardWithImage = ({ project, idx, navigate }) => {
       </div>
     </div>
   );
-};
+});
 
 const Work = () => {
   const navigate = useNavigate();

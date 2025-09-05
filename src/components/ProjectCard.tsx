@@ -1,5 +1,6 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { memo } from 'react';
+import { useImageLoader } from '../hooks/useImageLoader';
 
 interface Project {
   id: number;
@@ -15,27 +16,14 @@ interface ProjectCardProps {
   onClick?: () => void;
 }
 
-const ProjectCard = ({ project, index = 0, onClick }: ProjectCardProps) => {
-  const [loaded, setLoaded] = useState(false);
-  const [imageSrc, setImageSrc] = useState('');
-
-  // Generate optimized image URLs
-  const generateImageSrc = () => {
-    if (project.image.includes('unsplash.com')) {
-      // Optimize Unsplash images
-      return `${project.image}?w=600&h=400&fit=crop&auto=format&q=80`;
-    } else if (project.image.includes('/assets/')) {
-      // Local assets - use original
-      return project.image;
-    } else {
-      return project.image;
-    }
-  };
-
-  // Set image source on mount
-  useEffect(() => {
-    setImageSrc(generateImageSrc());
-  }, [project.image]);
+const ProjectCard = memo(({ project, index = 0, onClick }: ProjectCardProps) => {
+  const { imageSrc, loaded, handleLoad, handleError } = useImageLoader({
+    src: project.image,
+    isPriority: index < 3, // First 3 images are priority
+    width: 600,
+    height: 400,
+    quality: 75
+  });
 
   return (
     <div 
@@ -52,14 +40,11 @@ const ProjectCard = ({ project, index = 0, onClick }: ProjectCardProps) => {
         <img
           src={imageSrc}
           alt={project.title}
-          className={`w-full h-full object-cover transition-all duration-700 ease-in-out group-hover:opacity-0 group-hover:scale-110 group-hover:blur-sm block ${loaded ? 'opacity-100' : 'opacity-0'}`}
-          loading="lazy"
+          className={`w-full h-full object-cover transition-all duration-500 ease-in-out group-hover:opacity-0 group-hover:scale-105 block ${loaded ? 'opacity-100' : 'opacity-0'}`}
+          loading={index < 3 ? "eager" : "lazy"}
           decoding="async"
-          onLoad={() => setLoaded(true)}
-          onError={() => {
-            // Fallback to original image if optimized version fails
-            setImageSrc(project.image);
-          }}
+          onLoad={handleLoad}
+          onError={handleError}
         />
         
         {/* Name Only Overlay */}
@@ -73,6 +58,6 @@ const ProjectCard = ({ project, index = 0, onClick }: ProjectCardProps) => {
       </div>
     </div>
   );
-};
+});
 
 export default ProjectCard;
