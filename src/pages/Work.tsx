@@ -53,7 +53,7 @@ const ProjectCardWithImage = ({ project, idx, navigate }) => {
         alt={project.title}
         loading={isPriority ? "eager" : "lazy"}
         decoding="async"
-        fetchPriority={isPriority ? "high" : "auto"}
+        {...(isPriority ? { fetchpriority: "high" } : {})}
         className={`w-full h-full object-cover rounded-lg transition-all duration-700 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'} group-hover:opacity-0 group-hover:scale-110 group-hover:blur-sm`}
         onLoad={() => setLoaded(true)}
         onError={() => {
@@ -194,12 +194,6 @@ const Work = () => {
     ? projects 
     : projects.filter(project => project.category.toLowerCase() === selectedCategory.toLowerCase());
 
-  const scrollToProjects = () => {
-    const projectsSection = document.getElementById('projects-section');
-    if (projectsSection) {
-      projectsSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   const handleProjectClick = (project) => {
     navigate(`/project/${project.id}`);
@@ -231,49 +225,7 @@ const Work = () => {
   ].filter(Boolean);
 
   return (
-    <div className="pt-0 md:pt-0">
-      {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden pt-14 md:pt-0">
-        {/* Background Image */}
-        <div 
-          className="absolute inset-0 z-0 brightness-[0.8]"
-          style={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=1920&h=1080&fit=crop)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat'
-          }}
-        />
-        
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 z-10 bg-gradient-to-br from-[#EADBD4]/60 via-[#2C2C2C]/60 to-[#000000]/60" />
-        
-        {/* Content */}
-        <div className="relative z-20 max-w-5xl mx-auto text-center px-6 animate-fade-in">
-          <h1 className="font-playfair text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white mb-6 leading-tight animate-fade-in">
-            Contextual Design.<br />
-            Timeless Execution.
-          </h1>
-          <p className="font-inter text-xl md:text-2xl lg:text-3xl text-cream-100 mb-12 max-w-4xl mx-auto leading-relaxed font-light animate-fade-in">
-            Crafting architectural and interior experiences rooted in narrative and permanence.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-fade-in">
-            <button 
-              onClick={scrollToProjects}
-              className="bg-charcoal-800 text-cream-50 px-10 py-4 rounded-full font-inter font-medium text-lg transition-all duration-300 hover:bg-charcoal-700 hover:shadow-xl hover:scale-105"
-            >
-              Explore Our Work
-            </button>
-            <button 
-              onClick={() => navigate('/contact')}
-              className="border-2 border-cream-50 text-cream-50 px-10 py-4 rounded-full font-inter font-medium text-lg transition-all duration-300 hover:bg-cream-50 hover:text-charcoal-800 hover:shadow-xl hover:scale-105"
-            >
-              Contact Us
-            </button>
-          </div>
-        </div>
-      </section>
-
+    <div className="pt-20">
       {/* Featured Projects */}
       <section id="projects-section" className="py-20 px-6">
         <div className="max-w-7xl mx-auto">

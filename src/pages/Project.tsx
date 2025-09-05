@@ -146,7 +146,7 @@ const Project = () => {
                 alt={project.title}
                 className={`w-full h-auto object-cover rounded-lg shadow-lg transition duration-300 ease-in-out ${loaded ? '' : 'blur-sm'}`}
                 style={{ maxHeight: '70vh' }}
-                fetchPriority="high"
+                {...{ fetchpriority: "high" }}
                 onLoad={() => setLoaded(true)}
                 srcSet={projectImages[0].endsWith('.webp') ? undefined : projectImages[0].replace(/\.(jpg|jpeg|png)$/i, '.webp') + ' 1x, ' + projectImages[0] + ' 2x'}
               />
