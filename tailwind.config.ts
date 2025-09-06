@@ -20,8 +20,9 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				'playfair': ['Playfair Display', 'serif'],
-				'inter': ['Inter', 'sans-serif'],
+				'century-gothic': ['Century Gothic', 'Arial', 'sans-serif'],
+				'playfair': ['Century Gothic', 'Arial', 'sans-serif'],
+				'inter': ['Century Gothic', 'Arial', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',

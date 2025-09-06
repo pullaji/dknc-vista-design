@@ -155,12 +155,6 @@ const Profile = () => {
 
           {/* Right Column - Detailed Information */}
           <div className="lg:col-span-2 space-y-6 sm:space-y-8">
-            {/* DKNC STUDIO PROFILE */}
-            <div className="bg-gray-50 p-4 sm:p-6 rounded-lg hover:bg-gray-100 transition-all duration-500 ease-in-out group hover:shadow-lg">
-              <h3 className="text-lg sm:text-xl font-bold text-charcoal-800 mb-4 text-center transition-all duration-500 ease-in-out group-hover:text-blush-600">
-                DKNC STUDIO PROFILE:
-              </h3>
-            </div>
 
             {/* Company Overview */}
             <div>

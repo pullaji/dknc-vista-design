@@ -41,21 +41,21 @@
   }
 
   body {
-    @apply bg-cream-50 text-charcoal-800 font-inter;
+    @apply bg-cream-50 text-charcoal-800 font-century-gothic;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-playfair;
+    @apply font-century-gothic;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-charcoal-800 text-cream-50 px-8 py-3 rounded-full font-inter font-medium transition-all duration-300 hover:bg-charcoal-700 hover:shadow-lg;
+    @apply bg-charcoal-800 text-cream-50 px-8 py-3 rounded-full font-century-gothic font-medium transition-all duration-300 hover:bg-charcoal-700 hover:shadow-lg;
   }
   
   .btn-ghost {
-    @apply border-2 border-charcoal-800 text-charcoal-800 px-8 py-3 rounded-full font-inter font-medium transition-all duration-300 hover:bg-charcoal-800 hover:text-cream-50;
+    @apply border-2 border-charcoal-800 text-charcoal-800 px-8 py-3 rounded-full font-century-gothic font-medium transition-all duration-300 hover:bg-charcoal-800 hover:text-cream-50;
   }
 
   .project-card {
@@ -63,7 +63,7 @@
   }
 
   .nav-link {
-    @apply text-charcoal-800 hover:text-charcoal-900 transition-colors duration-200 font-inter font-medium relative;
+    @apply text-charcoal-800 hover:text-charcoal-900 transition-colors duration-200 font-century-gothic font-medium relative;
   }
 
   .nav-link::after {

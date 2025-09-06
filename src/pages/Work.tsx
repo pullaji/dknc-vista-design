@@ -88,10 +88,10 @@ const Work = () => {
       id: 2,
       title: 'Palliative Care',
       category: 'Architecture',
-      image: '/assets/2- PALLIATIVE CARE/1-TITLE.jpg',
+      image: '/assets/2- PALLIATIVE CARE/1Title.jpg',
       description: 'A thoughtfully designed healthcare facility focused on comfort and healing, featuring warm neutral tones, natural light, and carefully planned spaces for patients and families.',
       images: [
-        '/assets/2- PALLIATIVE CARE/1-TITLE.jpg',
+        '/assets/2- PALLIATIVE CARE/1Title.jpg',
         '/assets/2- PALLIATIVE CARE/2.jpg',
         '/assets/2- PALLIATIVE CARE/3.gif',
         '/assets/2- PALLIATIVE CARE/4-1.jpg',
@@ -214,48 +214,102 @@ const Work = () => {
 
   return (
     <div className="pt-20">
-      {/* Featured Projects */}
-      <section id="projects-section" className="py-20 px-6">
+      {/* Projects Section */}
+      <section className="py-20 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="font-playfair text-4xl font-semibold text-charcoal-800 mb-4">
-              Featured Projects
-            </h2>
-            <p className="text-charcoal-600 max-w-2xl mx-auto">
-              A selection of our work showcasing our approach to creating timeless, 
-              contextual architecture across residential and commercial spaces.
-            </p>
-          </div>
-
-          {/* Category Filter */}
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-6 py-2 rounded-full font-inter font-medium transition-all duration-500 ease-in-out transform hover:scale-105 ${
-                  selectedCategory === category
-                    ? 'bg-charcoal-800 text-cream-50 shadow-lg'
-                    : 'bg-cream-100 text-charcoal-600 hover:bg-blush-100 hover:shadow-md'
-                }`}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-
-          {/* Responsive Featured Projects Section - 2 rows, 3 cols, no vertical gap, responsive, with overlays */}
+          {/* Desktop Grid Layout - Different sizes for first image vs others */}
           <div className="max-w-screen-xl mx-auto px-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 grid-rows-2 auto-rows-[1fr] gap-4 items-stretch transition-all duration-700 ease-in-out">
-              {/* Row 1 */}
-              {filteredProjects.slice(0, 6).map((project, idx) => (
-                <ProjectCardWithImage 
-                  key={project.id}
-                  project={project}
-                  idx={idx}
-                  navigate={navigate}
-                />
-              ))}
+            {/* Mobile Layout */}
+            <div className="block md:hidden">
+              <div className="grid grid-cols-1 gap-4">
+                {filteredProjects.slice(0, 6).map((project, idx) => (
+                  <ProjectCardWithImage 
+                    key={project.id}
+                    project={project}
+                    idx={idx}
+                    navigate={navigate}
+                  />
+                ))}
+              </div>
+            </div>
+            
+            {/* Desktop Layout - Custom sizes */}
+            <div className="hidden md:block">
+              <div className="grid grid-cols-12 grid-rows-2 gap-4 h-[800px]">
+                {/* Row 1 */}
+                {/* First image - larger (5 columns) */}
+                <div className="col-span-5 overflow-hidden rounded-lg relative group cursor-pointer" onClick={() => navigate(`/project/${filteredProjects[0]?.id}`)}>
+                  <img
+                    src={filteredProjects[0]?.image}
+                    alt={filteredProjects[0]?.title}
+                    className="w-full h-full object-cover transition-all duration-500 ease-in-out group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-white transition-all duration-700 ease-in-out rounded-lg opacity-0 group-hover:opacity-100 flex items-center justify-center">
+                    <span className="text-charcoal-800 text-lg font-semibold text-center px-4 font-playfair">{filteredProjects[0]?.title}</span>
+                  </div>
+                </div>
+                
+                {/* Second image - smaller (3.5 columns) */}
+                <div className="col-span-3 overflow-hidden rounded-lg relative group cursor-pointer" onClick={() => navigate(`/project/${filteredProjects[1]?.id}`)}>
+                  <img
+                    src={filteredProjects[1]?.image}
+                    alt={filteredProjects[1]?.title}
+                    className="w-full h-full object-cover transition-all duration-500 ease-in-out group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-white transition-all duration-700 ease-in-out rounded-lg opacity-0 group-hover:opacity-100 flex items-center justify-center">
+                    <span className="text-charcoal-800 text-lg font-semibold text-center px-4 font-playfair">{filteredProjects[1]?.title}</span>
+                  </div>
+                </div>
+                
+                {/* Third image - smaller (3.5 columns) */}
+                <div className="col-span-4 overflow-hidden rounded-lg relative group cursor-pointer" onClick={() => navigate(`/project/${filteredProjects[2]?.id}`)}>
+                  <img
+                    src={filteredProjects[2]?.image}
+                    alt={filteredProjects[2]?.title}
+                    className="w-full h-full object-cover transition-all duration-500 ease-in-out group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-white transition-all duration-700 ease-in-out rounded-lg opacity-0 group-hover:opacity-100 flex items-center justify-center">
+                    <span className="text-charcoal-800 text-lg font-semibold text-center px-4 font-playfair">{filteredProjects[2]?.title}</span>
+                  </div>
+                </div>
+                
+                {/* Row 2 */}
+                {/* Fourth image - smaller (3.5 columns) */}
+                <div className="col-span-4 overflow-hidden rounded-lg relative group cursor-pointer" onClick={() => navigate(`/project/${filteredProjects[3]?.id}`)}>
+                  <img
+                    src={filteredProjects[3]?.image}
+                    alt={filteredProjects[3]?.title}
+                    className="w-full h-full object-cover transition-all duration-500 ease-in-out group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-white transition-all duration-700 ease-in-out rounded-lg opacity-0 group-hover:opacity-100 flex items-center justify-center">
+                    <span className="text-charcoal-800 text-lg font-semibold text-center px-4 font-playfair">{filteredProjects[3]?.title}</span>
+                  </div>
+                </div>
+                
+                {/* Fifth image - larger (5 columns) */}
+                <div className="col-span-5 overflow-hidden rounded-lg relative group cursor-pointer" onClick={() => navigate(`/project/${filteredProjects[4]?.id}`)}>
+                  <img
+                    src={filteredProjects[4]?.image}
+                    alt={filteredProjects[4]?.title}
+                    className="w-full h-full object-cover transition-all duration-500 ease-in-out group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-white transition-all duration-700 ease-in-out rounded-lg opacity-0 group-hover:opacity-100 flex items-center justify-center">
+                    <span className="text-charcoal-800 text-lg font-semibold text-center px-4 font-playfair">{filteredProjects[4]?.title}</span>
+                  </div>
+                </div>
+                
+                {/* Sixth image - smaller (3 columns) */}
+                <div className="col-span-3 overflow-hidden rounded-lg relative group cursor-pointer" onClick={() => navigate(`/project/${filteredProjects[5]?.id}`)}>
+                  <img
+                    src={filteredProjects[5]?.image}
+                    alt={filteredProjects[5]?.title}
+                    className="w-full h-full object-cover transition-all duration-500 ease-in-out group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-white transition-all duration-700 ease-in-out rounded-lg opacity-0 group-hover:opacity-100 flex items-center justify-center">
+                    <span className="text-charcoal-800 text-lg font-semibold text-center px-4 font-playfair">{filteredProjects[5]?.title}</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
