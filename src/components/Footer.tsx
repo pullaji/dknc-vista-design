@@ -85,7 +85,7 @@ const Footer = () => {
         
         <div className="border-t border-charcoal-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-cream-200 text-sm">
-            © 2024 DKnC Architecture. All rights reserved.
+            © 2021 DKnC Architecture. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="text-cream-200 hover:text-cream-50 transition-colors text-sm">
