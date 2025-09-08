@@ -48,6 +48,7 @@ const ProjectCardWithImage = React.memo(({ project, idx, navigate }: ProjectCard
         className={`w-full h-full object-cover rounded-lg transition-all duration-500 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'} group-hover:opacity-0 group-hover:scale-105`}
         onLoad={handleLoad}
         onError={handleError}
+        style={{ contentVisibility: 'auto' }}
       />
       {/* Name Only Overlay */}
       <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-white transition-all duration-700 ease-in-out rounded-lg opacity-0 group-hover:opacity-100 focus:opacity-100 transform scale-95 group-hover:scale-100">
@@ -241,6 +242,10 @@ const Work = () => {
                     src={filteredProjects[0]?.image}
                     alt={filteredProjects[0]?.title}
                     className="w-full h-full object-cover transition-all duration-500 ease-in-out group-hover:scale-105"
+                    loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
+                    style={{ contentVisibility: 'auto' }}
                   />
                   <div className="absolute inset-0 bg-white transition-all duration-700 ease-in-out rounded-lg opacity-0 group-hover:opacity-100 flex items-center justify-center">
                     <span className="text-charcoal-800 text-lg font-semibold text-center px-4 font-playfair">{filteredProjects[0]?.title}</span>
@@ -253,6 +258,9 @@ const Work = () => {
                     src={filteredProjects[1]?.image}
                     alt={filteredProjects[1]?.title}
                     className="w-full h-full object-cover transition-all duration-500 ease-in-out group-hover:scale-105"
+                    loading="eager"
+                    decoding="async"
+                    style={{ contentVisibility: 'auto' }}
                   />
                   <div className="absolute inset-0 bg-white transition-all duration-700 ease-in-out rounded-lg opacity-0 group-hover:opacity-100 flex items-center justify-center">
                     <span className="text-charcoal-800 text-lg font-semibold text-center px-4 font-playfair">{filteredProjects[1]?.title}</span>
@@ -265,6 +273,9 @@ const Work = () => {
                     src={filteredProjects[2]?.image}
                     alt={filteredProjects[2]?.title}
                     className="w-full h-full object-cover transition-all duration-500 ease-in-out group-hover:scale-105"
+                    loading="eager"
+                    decoding="async"
+                    style={{ contentVisibility: 'auto' }}
                   />
                   <div className="absolute inset-0 bg-white transition-all duration-700 ease-in-out rounded-lg opacity-0 group-hover:opacity-100 flex items-center justify-center">
                     <span className="text-charcoal-800 text-lg font-semibold text-center px-4 font-playfair">{filteredProjects[2]?.title}</span>
@@ -278,6 +289,9 @@ const Work = () => {
                     src={filteredProjects[3]?.image}
                     alt={filteredProjects[3]?.title}
                     className="w-full h-full object-cover transition-all duration-500 ease-in-out group-hover:scale-105"
+                    loading="lazy"
+                    decoding="async"
+                    style={{ contentVisibility: 'auto' }}
                   />
                   <div className="absolute inset-0 bg-white transition-all duration-700 ease-in-out rounded-lg opacity-0 group-hover:opacity-100 flex items-center justify-center">
                     <span className="text-charcoal-800 text-lg font-semibold text-center px-4 font-playfair">{filteredProjects[3]?.title}</span>
@@ -290,6 +304,9 @@ const Work = () => {
                     src={filteredProjects[4]?.image}
                     alt={filteredProjects[4]?.title}
                     className="w-full h-full object-cover transition-all duration-500 ease-in-out group-hover:scale-105"
+                    loading="lazy"
+                    decoding="async"
+                    style={{ contentVisibility: 'auto' }}
                   />
                   <div className="absolute inset-0 bg-white transition-all duration-700 ease-in-out rounded-lg opacity-0 group-hover:opacity-100 flex items-center justify-center">
                     <span className="text-charcoal-800 text-lg font-semibold text-center px-4 font-playfair">{filteredProjects[4]?.title}</span>
@@ -302,6 +319,9 @@ const Work = () => {
                     src={filteredProjects[5]?.image}
                     alt={filteredProjects[5]?.title}
                     className="w-full h-full object-cover transition-all duration-500 ease-in-out group-hover:scale-105"
+                    loading="lazy"
+                    decoding="async"
+                    style={{ contentVisibility: 'auto' }}
                   />
                   <div className="absolute inset-0 bg-white transition-all duration-700 ease-in-out rounded-lg opacity-0 group-hover:opacity-100 flex items-center justify-center">
                     <span className="text-charcoal-800 text-lg font-semibold text-center px-4 font-playfair">{filteredProjects[5]?.title}</span>

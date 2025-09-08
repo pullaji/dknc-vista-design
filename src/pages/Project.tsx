@@ -150,8 +150,9 @@ const Project = () => {
                   src={projectImages[0]}
                   alt={project.title}
                   className={`w-full h-auto object-cover rounded-lg shadow-lg transition duration-300 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'}`}
-                  style={{ maxHeight: '80vh' }}
-                  {...{ fetchpriority: "high" }}
+                  style={{ maxHeight: '80vh', contentVisibility: 'auto' }}
+                  loading="eager"
+                  fetchPriority="high"
                   onLoad={() => setLoaded(true)}
                   onError={() => setError(true)}
                 />
@@ -185,6 +186,8 @@ const Project = () => {
                       alt={`${project.title} - Image ${idx + 2}`}
                       className={`w-full h-96 lg:h-[500px] rounded-lg shadow-lg object-cover transition duration-300 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'}`}
                       loading="lazy"
+                      decoding="async"
+                      style={{ contentVisibility: 'auto' }}
                       onLoad={() => setLoaded(true)}
                       onError={() => setError(true)}
                     />
@@ -216,6 +219,8 @@ const Project = () => {
                         alt={`${project.title} - Image ${idx + 5}`}
                         className={`w-full h-80 lg:h-96 rounded-lg shadow-lg object-cover transition duration-300 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'}`}
                         loading="lazy"
+                        decoding="async"
+                        style={{ contentVisibility: 'auto' }}
                         onLoad={() => setLoaded(true)}
                         onError={() => setError(true)}
                       />
@@ -248,6 +253,8 @@ const Project = () => {
                         alt={`${project.title} - Image ${idx + 8}`}
                         className={`w-full h-64 md:h-72 rounded-lg shadow-md object-cover transition duration-300 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'}`}
                         loading="lazy"
+                        decoding="async"
+                        style={{ contentVisibility: 'auto' }}
                         onLoad={() => setLoaded(true)}
                         onError={() => setError(true)}
                       />
