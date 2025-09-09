@@ -126,7 +126,7 @@ const Work = () => {
       title: 'MANEA MANIKONDA',
       category: 'Interior',
       image: '/assets/MANEA_MANIKONDA/Title.jpTitle.webp',
-      description: 'A contemporary residential project in Manikonda, Hyderabad, designed for modern living with elegant spaces.',
+      description: 'A contemporary salon project in Manikonda, Hyderabad, designed for modern beauty and wellness services with elegant spaces.',
       images: [
         '/assets/MANEA_MANIKONDA/Title.jpTitle.webp',
         '/assets/MANEA_MANIKONDA/1.webp',
@@ -243,7 +243,7 @@ const Work = () => {
                     alt={filteredProjects[0]?.title}
                     className="w-full h-full object-cover transition-all duration-500 ease-in-out group-hover:scale-105"
                     loading="eager"
-                    fetchPriority="high"
+                    {...{ fetchpriority: "high" }}
                     decoding="async"
                     style={{ contentVisibility: 'auto' }}
                   />
