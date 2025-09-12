@@ -99,8 +99,8 @@ const Contact = () => {
                 <div>
                   <h3 className="font-inter font-semibold text-charcoal-800 mb-2">Address</h3>
                   <p className="text-charcoal-600 leading-relaxed">
-                    Jubilee Hills 1 main road, Hyderabad<br />
-                    Telangana, India 500033
+                    Banjara Hills, Hyderabad<br />
+                    Telangana, India 500034
                   </p>
                 </div>
                 

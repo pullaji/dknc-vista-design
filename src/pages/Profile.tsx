@@ -43,8 +43,7 @@ const Profile = () => {
       ],
       contact: {
         email: 'Designs@divyakruthi.com',
-        phone: '+1 (555) 234-5678',
-        linkedin: 'https://linkedin.com/in/chaitanya-garikipati',
+        phone: '+91 7799391131',
         instagram: 'https://www.instagram.com/divyakruthidesigns?gh-MX2qYV6NV-YNGdaQ-'
       }
     },
@@ -57,12 +56,12 @@ const Profile = () => {
       founded: '2018',
       founder: 'Divya Kruthi Rangisetty',
       companyOverview: 'Divya Kruthi & Chaitanya studio (DKNC) is a forward-thinking architectural firm established in 2018. We are committed to excellence, sustainable practices, and community-driven solutions. Our diverse project range focuses on balancing creative vision with practical implementation to ensure high standards of architecture and environmental stewardship.',
-      about: 'Divya Kruthi is an accomplished architect with over 11 years of professional experience, co-founding DKNC Studio in 2018. She is a forward-thinking architectural firm that has been redefining spaces through innovative design, sustainable practices, and community-driven solutions. Divya is highly regarded for her meticulous attention to detail and unwavering commitment to creating structures that integrate seamlessly with their surrounding environments. After graduation, she began working for some of the most renowned architecture firms in the industry, honing her skills and building a diverse portfolio. Since 2018, she has been successfully expanding her architectural practice, DKNC Studio, committed to exploring new frontiers in design and sustainability. Her work spans commercial buildings, residential homes, hospitality projects, and public spaces.',
+      about: 'Divya Kruthi is an accomplished architect with over 11 years of professional experience, founding DKNC Studio in 2018. She is a forward-thinking architectural firm that has been redefining spaces through innovative design, sustainable practices, and community-driven solutions. Divya is highly regarded for her meticulous attention to detail and unwavering commitment to creating structures that integrate seamlessly with their surrounding environments. After graduation, she began working for some of the most renowned architecture firms in the industry, honing her skills and building a diverse portfolio. Since 2018, she has been successfully expanding her architectural practice, DKNC Studio, committed to exploring new frontiers in design and sustainability. Her areas of expertise include High End Residential, Commercial, Life style, Public spaces and hospitality, and she is known for her ability to create designs that balance functionality with aesthetics.',
       education: {
         period: 'June 2008 - April 2013',
-        institution: 'Jawaharlal Nehru Architecture and Fine Arts University (Erstwhile JNTU)',
+        institution: 'SCHOOL OF PLANNING AND ARCHITECTURE, JNAFAU',
         location: 'Hyderabad, India',
-        degree: 'Graduation in Bachelors of Architecture',
+        degree: 'Bachelor\'s degree in Architecture',
         additional: 'Awarded two gold medals for exceptional academic performance in design'
       },
       specialties: ['Residential Architecture', 'Commercial Architecture', 'Lifestyle & Hospitality', 'Sustainable Design', 'Community-Driven Solutions', 'Environmental Integration', 'Innovative Design', 'Project Management'],
@@ -78,7 +77,7 @@ const Profile = () => {
       contact: {
         email: 'Designs@divyakruthi.com',
         phone: '+91 7799391131',
-        linkedin: 'https://linkedin.com/in/divya-kruthi'
+        linkedin: 'https://www.linkedin.com/in/divya-kruthi-21492656/'
       }
     }
   ];
@@ -174,6 +173,32 @@ const Profile = () => {
               <p className="text-charcoal-600 leading-relaxed mb-4 text-sm sm:text-base">
                 {member.about}
               </p>
+              
+              {/* Education Section for Divya Kruthi */}
+              {member.id === 'divya' && member.education && (
+                <div className="mt-4 p-4 bg-gray-50 rounded-lg">
+                  <h4 className="text-base sm:text-lg font-semibold text-charcoal-800 mb-2">
+                    Education:
+                  </h4>
+                  <div className="text-charcoal-600 text-sm sm:text-base">
+                    <p className="mb-2">
+                      <span className="font-medium">Period:</span> {member.education.period}
+                    </p>
+                    <p className="mb-2">
+                      <span className="font-medium">Institution:</span> {member.education.institution}
+                    </p>
+                    <p className="mb-2">
+                      <span className="font-medium">Location:</span> {member.education.location}
+                    </p>
+                    <p className="mb-2">
+                      <span className="font-medium">Degree:</span> {member.education.degree}
+                    </p>
+                    <p className="text-blush-600 font-medium">
+                      {member.education.additional}
+                    </p>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Key Achievements */}
@@ -208,7 +233,9 @@ const Profile = () => {
               <div className="bg-gray-50 p-3 sm:p-4 rounded-lg space-y-2 text-sm sm:text-base">
                 <div><span className="font-semibold">Email:</span> {member.contact.email}</div>
                 <div><span className="font-semibold">Phone:</span> {member.contact.phone}</div>
-                <div><span className="font-semibold">LinkedIn:</span> <a href={member.contact.linkedin} target="_blank" rel="noopener noreferrer" className="text-blush-600 hover:underline">{member.contact.linkedin}</a></div>
+                {member.contact.linkedin && (
+                  <div><span className="font-semibold">LinkedIn:</span> <a href={member.contact.linkedin} target="_blank" rel="noopener noreferrer" className="text-blush-600 hover:underline">{member.contact.linkedin}</a></div>
+                )}
               </div>
             </div>
           </div>
