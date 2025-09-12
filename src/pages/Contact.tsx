@@ -1,7 +1,76 @@
 
 import { Instagram } from 'lucide-react';
+import { useState } from 'react';
+import { toast } from 'sonner';
+import { FormData, submitToGoogleSheets, submitToGoogleSheetsFormData } from '../utils/formSubmission';
 
 const Contact = () => {
+  const [formData, setFormData] = useState<FormData>({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    projectType: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // IMPORTANT: Replace this URL with your actual Google Apps Script web app URL
+  // After deploying your Apps Script, paste the Web App URL here
+  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyP5don6k2S1gJ3iB7n-lcCSS9aaySW4zYd6Qi8HGprBg7zzS5WOXy5QZR3SKOVszlYVQ/exec';
+  
+  // Example of what your URL should look like:
+  // const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/1ABC123XYZ456.../exec';
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      console.log('Submitting form data:', formData);
+      console.log('Using URL:', GOOGLE_SCRIPT_URL);
+      
+      // Check if URL is properly set
+      if (GOOGLE_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+        toast.error('Please set up your Google Apps Script URL first!');
+        setIsSubmitting(false);
+        return;
+      }
+      
+      // Try the more reliable form data method first
+      const success = await submitToGoogleSheetsFormData(formData, GOOGLE_SCRIPT_URL);
+      
+      if (success) {
+        toast.success('Message sent successfully! We\'ll get back to you soon.');
+        
+        // Reset form
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+          projectType: '',
+          message: ''
+        });
+      } else {
+        toast.error('Failed to send message. Please try again.');
+      }
+
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast.error('Failed to send message. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <div className="pt-20">
       {/* Header */}
@@ -65,23 +134,31 @@ const Contact = () => {
                 Start a Conversation
               </h2>
               
-              <form className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-charcoal-600 font-inter font-medium mb-2">
-                      First Name
+                      First Name *
                     </label>
                     <input
                       type="text"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleInputChange}
+                      required
                       className="w-full px-4 py-3 border border-cream-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blush-400 transition-colors"
                     />
                   </div>
                   <div>
                     <label className="block text-charcoal-600 font-inter font-medium mb-2">
-                      Last Name
+                      Last Name *
                     </label>
                     <input
                       type="text"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleInputChange}
+                      required
                       className="w-full px-4 py-3 border border-cream-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blush-400 transition-colors"
                     />
                   </div>
@@ -89,19 +166,44 @@ const Contact = () => {
                 
                 <div>
                   <label className="block text-charcoal-600 font-inter font-medium mb-2">
-                    Email
+                    Email *
                   </label>
                   <input
                     type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
                     className="w-full px-4 py-3 border border-cream-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blush-400 transition-colors"
                   />
                 </div>
                 
                 <div>
                   <label className="block text-charcoal-600 font-inter font-medium mb-2">
-                    Project Type
+                    Phone Number *
                   </label>
-                  <select className="w-full px-4 py-3 border border-cream-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blush-400 transition-colors">
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    required
+                    placeholder="+91 9876543210"
+                    className="w-full px-4 py-3 border border-cream-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blush-400 transition-colors"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-charcoal-600 font-inter font-medium mb-2">
+                    Project Type *
+                  </label>
+                  <select 
+                    name="projectType"
+                    value={formData.projectType}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-3 border border-cream-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blush-400 transition-colors"
+                  >
                     <option value="">Select a project type</option>
                     <option value="residential">Residential</option>
                     <option value="commercial">Commercial</option>
@@ -112,9 +214,13 @@ const Contact = () => {
                 
                 <div>
                   <label className="block text-charcoal-600 font-inter font-medium mb-2">
-                    Message
+                    Message *
                   </label>
                   <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    required
                     rows={6}
                     className="w-full px-4 py-3 border border-cream-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blush-400 transition-colors"
                     placeholder="Tell us about your project, timeline, and vision..."
@@ -123,9 +229,10 @@ const Contact = () => {
                 
                 <button
                   type="submit"
-                  className="w-full btn-primary"
+                  disabled={isSubmitting}
+                  className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Send Message
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
                 </button>
               </form>
             </div>
