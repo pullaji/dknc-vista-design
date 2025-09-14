@@ -70,7 +70,7 @@ const Media = () => {
       publication: "Design Pataki",
       date: "June 2021",
       type: "WEB",
-      mainImage: "/assets/1- MANEA_GACHBOWLI/1- TITLE.webp",
+      mainImage: "/assets/1- MANEA_GACHBOWLI/1-title.webp",
       category: "Residential"
     },
     {
