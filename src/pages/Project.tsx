@@ -53,17 +53,19 @@ const Project = () => {
       id: 3,
       title: 'Santhome Home',
       category: 'Architecture',
-      image: '/assets/Chennai Santhome/TITLE.webp',
+      image: '/assets/Chennai%20Santhome/TITLE.webp',
       description: 'A modern home project located in Santhome, Chennai, blending contemporary design with local context.',
       images: [
-        '/assets/Chennai Santhome/TITLE.webp',
-        '/assets/Chennai Santhome/1.webp',
-        '/assets/Chennai Santhome/2.webp',
-        '/assets/Chennai Santhome/3.webp',
-        '/assets/Chennai Santhome/4.webp',
-        '/assets/Chennai Santhome/5.webp',
+        '/assets/Chennai%20Santhome/TITLE.webp',
+        '/assets/Chennai%20Santhome/1.webp',
+        '/assets/Chennai%20Santhome/2.webp',
+        '/assets/Chennai%20Santhome/3.webp',
+        '/assets/Chennai%20Santhome/4.webp',
+        '/assets/Chennai%20Santhome/5.webp',
       ],
-      location: 'Santhome, Chennai'
+      location: 'Santhome, Chennai',
+      year: '2023',
+      type: 'Residential Architecture'
     },
     {
       id: 4,
