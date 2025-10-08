@@ -3,8 +3,6 @@ import React, { useState } from 'react';
 
 const Project = () => {
   const { id } = useParams();
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [selectedImageIndex, setSelectedImageIndex] = useState<number>(0);
   
   // Project data (same as in Work.tsx - in a real app this would come from a data source)
   const projects = [
@@ -23,6 +21,7 @@ const Project = () => {
         '/assets/1- MANEA_GACHBOWLI/6.webp',
         '/assets/1- MANEA_GACHBOWLI/7.webp',
         '/assets/1- MANEA_GACHBOWLI/8.webp',
+        '/assets/1- MANEA_GACHBOWLI/9.webp',
       ],
       location: 'Gachibowli, Hyderabad',
       year: '2024',
@@ -121,42 +120,6 @@ const Project = () => {
 
   const projectImages = project.images || [project.image];
 
-  const openImageModal = (imageSrc: string, index: number) => {
-    setSelectedImage(imageSrc);
-    setSelectedImageIndex(index);
-  };
-
-  const closeImageModal = () => {
-    setSelectedImage(null);
-    setSelectedImageIndex(0);
-  };
-
-  const navigateImage = (direction: 'prev' | 'next') => {
-    if (!selectedImage) return;
-    
-    const currentIndex = selectedImageIndex;
-    let newIndex;
-    
-    if (direction === 'prev') {
-      newIndex = currentIndex > 0 ? currentIndex - 1 : projectImages.length - 1;
-    } else {
-      newIndex = currentIndex < projectImages.length - 1 ? currentIndex + 1 : 0;
-    }
-    
-    setSelectedImage(projectImages[newIndex]);
-    setSelectedImageIndex(newIndex);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      closeImageModal();
-    } else if (e.key === 'ArrowLeft') {
-      navigateImage('prev');
-    } else if (e.key === 'ArrowRight') {
-      navigateImage('next');
-    }
-  };
-
   return (
     <div className="pt-20 min-h-screen bg-cream-50">
       <div className="max-w-7xl mx-auto px-6 py-12">
@@ -176,10 +139,7 @@ const Project = () => {
             const [loaded, setLoaded] = useState(false);
             const [error, setError] = useState(false);
             return (
-              <div 
-                className="relative cursor-pointer group"
-                onClick={() => openImageModal(projectImages[0], 0)}
-              >
+              <div className="relative">
                 {!loaded && !error && (
                   <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-lg flex items-center justify-center">
                     <div className="text-gray-400">Loading...</div>
@@ -188,7 +148,7 @@ const Project = () => {
                 <img
                   src={projectImages[0]}
                   alt={project.title}
-                  className={`w-full h-auto object-cover rounded-lg shadow-lg transition duration-300 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'} group-hover:opacity-90`}
+                  className={`w-full h-auto object-cover rounded-lg shadow-lg transition duration-300 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'}`}
                   style={{ maxHeight: '80vh', contentVisibility: 'auto' }}
                   loading="eager"
                   {...{ fetchpriority: "high" }}
@@ -200,23 +160,15 @@ const Project = () => {
                     <div className="text-gray-500">Image failed to load</div>
                   </div>
                 )}
-                {/* Click indicator */}
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 rounded-lg flex items-center justify-center">
-                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white bg-opacity-90 rounded-full p-3">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
-                    </svg>
-                  </div>
-                </div>
               </div>
             );
           })()}
         </div>
 
-        {/* All Project Images - Row Layout */}
+        {/* All Project Images - New Layout: 1 main, then 2 grid, then 3 grid, then 3½ last */}
         {projectImages.length > 1 && (
           <div className="mb-16">
-            {/* First Row - 2 Images */}
+            {/* Second Row - 2 Images in Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               {projectImages.slice(1, 3).map((img, idx) => {
                 const [loaded, setLoaded] = useState(false);
@@ -224,8 +176,7 @@ const Project = () => {
                 return (
                 <div 
                   key={idx} 
-                  className="relative cursor-pointer group"
-                  onClick={() => openImageModal(img, idx + 1)}
+                  className="relative"
                 >
                   {!loaded && !error && (
                     <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-lg flex items-center justify-center">
@@ -235,7 +186,7 @@ const Project = () => {
                   <img
                     src={img}
                     alt={`${project.title} - Image ${idx + 2}`}
-                    className={`w-full h-96 lg:h-[500px] rounded-lg shadow-lg object-cover transition duration-300 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'} group-hover:opacity-90`}
+                    className={`w-full h-96 lg:h-[500px] rounded-lg shadow-lg object-cover transition duration-300 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'}`}
                     loading="lazy"
                     decoding="async"
                     style={{ contentVisibility: 'auto' }}
@@ -247,30 +198,21 @@ const Project = () => {
                       <div className="text-gray-500">Image failed to load</div>
                     </div>
                   )}
-                  {/* Click indicator */}
-                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 rounded-lg flex items-center justify-center">
-                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white bg-opacity-90 rounded-full p-2">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
-                      </svg>
-                    </div>
-                  </div>
                 </div>
                 );
               })}
             </div>
 
-            {/* Second Row - 3 Images */}
+            {/* Third Row - 2 Images in Grid */}
             {projectImages.length > 3 && (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                {projectImages.slice(3, 6).map((img, idx) => {
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                {projectImages.slice(3, 5).map((img, idx) => {
                   const [loaded, setLoaded] = useState(false);
                   const [error, setError] = useState(false);
                   return (
                     <div 
                       key={idx + 3} 
-                      className="relative cursor-pointer group"
-                      onClick={() => openImageModal(img, idx + 4)}
+                      className="relative"
                     >
                       {!loaded && !error && (
                         <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-lg flex items-center justify-center">
@@ -279,8 +221,8 @@ const Project = () => {
                       )}
                       <img
                         src={img}
-                        alt={`${project.title} - Image ${idx + 5}`}
-                        className={`w-full h-80 lg:h-96 rounded-lg shadow-lg object-cover transition duration-300 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'} group-hover:opacity-90`}
+                        alt={`${project.title} - Image ${idx + 4}`}
+                        className={`w-full h-96 lg:h-[500px] rounded-lg shadow-lg object-cover transition duration-300 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'}`}
                         loading="lazy"
                         decoding="async"
                         style={{ contentVisibility: 'auto' }}
@@ -288,35 +230,167 @@ const Project = () => {
                         onError={() => setError(true)}
                       />
                       {error && (
-                        <div className="w-full h-80 lg:h-96 bg-gray-100 rounded-lg flex items-center justify-center">
+                        <div className="w-full h-96 lg:h-[500px] bg-gray-100 rounded-lg flex items-center justify-center">
                           <div className="text-gray-500">Image failed to load</div>
                         </div>
                       )}
-                      {/* Click indicator */}
-                      <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 rounded-lg flex items-center justify-center">
-                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white bg-opacity-90 rounded-full p-2">
-                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
-                          </svg>
-                        </div>
-                      </div>
                     </div>
                   );
                 })}
               </div>
             )}
 
-            {/* Third Row - Remaining Images */}
-            {projectImages.length > 6 && (
+            {/* Fourth Row - Modified Asymmetrical Layout */}
+            {projectImages.length > 5 && (
+              <div className="grid grid-cols-5 gap-4 mb-8">
+                {/* Left Vertical Image - Increased width, decreased height */}
+                {projectImages[5] && (
+                  <div className="col-span-2 row-span-1">
+                    {(() => {
+                      const [loaded, setLoaded] = useState(false);
+                      const [error, setError] = useState(false);
+                      return (
+                        <div className="relative h-full">
+                          {!loaded && !error && (
+                            <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-lg flex items-center justify-center">
+                              <div className="text-gray-400 text-xs">Loading...</div>
+                            </div>
+                          )}
+                          <img
+                            src={projectImages[5]}
+                            alt={`${project.title} - Image 6`}
+                            className={`w-full h-full rounded-lg shadow-md object-cover transition duration-300 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'}`}
+                            loading="lazy"
+                            decoding="async"
+                            style={{ contentVisibility: 'auto', height: '300px' }}
+                            onLoad={() => setLoaded(true)}
+                            onError={() => setError(true)}
+                          />
+                          {error && (
+                            <div className="w-full h-72 bg-gray-100 rounded-lg flex items-center justify-center">
+                              <div className="text-gray-500 text-xs">Failed</div>
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })()}
+                  </div>
+                )}
+
+                {/* Top Middle Horizontal Image - Decreased width, moved to top */}
+                {projectImages[6] && (
+                  <div className="col-span-1 row-span-1">
+                    {(() => {
+                      const [loaded, setLoaded] = useState(false);
+                      const [error, setError] = useState(false);
+                      return (
+                        <div className="relative h-full">
+                          {!loaded && !error && (
+                            <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-lg flex items-center justify-center">
+                              <div className="text-gray-400 text-xs">Loading...</div>
+                            </div>
+                          )}
+                          <img
+                            src={projectImages[6]}
+                            alt={`${project.title} - Image 7`}
+                            className={`w-full h-full rounded-lg shadow-md object-cover transition duration-300 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'}`}
+                            loading="lazy"
+                            decoding="async"
+                            style={{ contentVisibility: 'auto', height: '300px' }}
+                            onLoad={() => setLoaded(true)}
+                            onError={() => setError(true)}
+                          />
+                          {error && (
+                            <div className="w-full h-72 bg-gray-100 rounded-lg flex items-center justify-center">
+                              <div className="text-gray-500 text-xs">Failed</div>
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })()}
+                  </div>
+                )}
+
+                {/* Bottom Middle Horizontal Image - Decreased width, moved to top */}
+                {projectImages[7] && (
+                  <div className="col-span-1 row-span-1">
+                    {(() => {
+                      const [loaded, setLoaded] = useState(false);
+                      const [error, setError] = useState(false);
+                      return (
+                        <div className="relative h-full">
+                          {!loaded && !error && (
+                            <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-lg flex items-center justify-center">
+                              <div className="text-gray-400 text-xs">Loading...</div>
+                            </div>
+                          )}
+                          <img
+                            src={projectImages[7]}
+                            alt={`${project.title} - Image 8`}
+                            className={`w-full h-full rounded-lg shadow-md object-cover transition duration-300 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'}`}
+                            loading="lazy"
+                            decoding="async"
+                            style={{ contentVisibility: 'auto', height: '300px' }}
+                            onLoad={() => setLoaded(true)}
+                            onError={() => setError(true)}
+                          />
+                          {error && (
+                            <div className="w-full h-72 bg-gray-100 rounded-lg flex items-center justify-center">
+                              <div className="text-gray-500 text-xs">Failed</div>
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })()}
+                  </div>
+                )}
+
+                {/* Right Vertical Image - Same sizes as modified image 1 */}
+                {projectImages[8] && (
+                  <div className="col-span-1 row-span-1">
+                    {(() => {
+                      const [loaded, setLoaded] = useState(false);
+                      const [error, setError] = useState(false);
+                      return (
+                        <div className="relative h-full">
+                          {!loaded && !error && (
+                            <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-lg flex items-center justify-center">
+                              <div className="text-gray-400 text-xs">Loading...</div>
+                            </div>
+                          )}
+                          <img
+                            src={projectImages[8]}
+                            alt={`${project.title} - Image 9`}
+                            className={`w-full h-full rounded-lg shadow-md object-cover transition duration-300 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'}`}
+                            loading="lazy"
+                            decoding="async"
+                            style={{ contentVisibility: 'auto', height: '300px' }}
+                            onLoad={() => setLoaded(true)}
+                            onError={() => setError(true)}
+                          />
+                          {error && (
+                            <div className="w-full h-72 bg-gray-100 rounded-lg flex items-center justify-center">
+                              <div className="text-gray-500 text-xs">Failed</div>
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })()}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Fifth Row - Remaining Images (if any more than 9) */}
+            {projectImages.length > 9 && (
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {projectImages.slice(6).map((img, idx) => {
+                {projectImages.slice(9).map((img, idx) => {
                   const [loaded, setLoaded] = useState(false);
                   const [error, setError] = useState(false);
                   return (
                     <div 
-                      key={idx + 6} 
-                      className="relative cursor-pointer group"
-                      onClick={() => openImageModal(img, idx + 7)}
+                      key={idx + 9} 
+                      className="relative"
                     >
                       {!loaded && !error && (
                         <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-lg flex items-center justify-center">
@@ -325,8 +399,8 @@ const Project = () => {
                       )}
                       <img
                         src={img}
-                        alt={`${project.title} - Image ${idx + 8}`}
-                        className={`w-full h-64 md:h-72 rounded-lg shadow-md object-cover transition duration-300 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'} group-hover:opacity-90`}
+                        alt={`${project.title} - Image ${idx + 10}`}
+                        className={`w-full h-64 md:h-72 rounded-lg shadow-md object-cover transition duration-300 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'}`}
                         loading="lazy"
                         decoding="async"
                         style={{ contentVisibility: 'auto' }}
@@ -338,14 +412,6 @@ const Project = () => {
                           <div className="text-gray-500 text-xs">Failed</div>
                         </div>
                       )}
-                      {/* Click indicator */}
-                      <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 rounded-lg flex items-center justify-center">
-                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white bg-opacity-90 rounded-full p-1.5">
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
-                          </svg>
-                        </div>
-                      </div>
                     </div>
                   );
                 })}
@@ -395,80 +461,6 @@ const Project = () => {
           </div>
         </div>
       </div>
-
-      {/* Image Modal */}
-      {selectedImage && (
-        <div 
-          className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4"
-          onClick={closeImageModal}
-          onKeyDown={handleKeyDown}
-          tabIndex={0}
-        >
-          <div className="relative max-w-7xl max-h-full w-full h-full flex items-center justify-center">
-            {/* Close Button */}
-            <button
-              onClick={closeImageModal}
-              className="absolute top-4 right-4 z-10 bg-white bg-opacity-20 hover:bg-opacity-30 text-white rounded-full p-3 transition-all duration-300"
-              aria-label="Close modal"
-            >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-              </svg>
-            </button>
-
-            {/* Navigation Buttons */}
-            {projectImages.length > 1 && (
-              <>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    navigateImage('prev');
-                  }}
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 bg-white bg-opacity-20 hover:bg-opacity-30 text-white rounded-full p-3 transition-all duration-300"
-                  aria-label="Previous image"
-                >
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="15,18 9,12 15,6"></polyline>
-                  </svg>
-                </button>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    navigateImage('next');
-                  }}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 bg-white bg-opacity-20 hover:bg-opacity-30 text-white rounded-full p-3 transition-all duration-300"
-                  aria-label="Next image"
-                >
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="9,18 15,12 9,6"></polyline>
-                  </svg>
-                </button>
-              </>
-            )}
-
-            {/* Image */}
-            <div 
-              className="relative max-w-full max-h-full"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <img
-                src={selectedImage}
-                alt={`${project.title} - Image ${selectedImageIndex + 1}`}
-                className="max-w-full max-h-full object-contain rounded-lg"
-                style={{ maxHeight: '90vh' }}
-              />
-            </div>
-
-            {/* Image Counter */}
-            {projectImages.length > 1 && (
-              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-50 text-white px-4 py-2 rounded-full text-sm">
-                {selectedImageIndex + 1} / {projectImages.length}
-              </div>
-            )}
-          </div>
-        </div>
-      )}
     </div>
   );
 };

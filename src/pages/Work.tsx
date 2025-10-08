@@ -82,6 +82,7 @@ const Work = () => {
         '/assets/1- MANEA_GACHBOWLI/6.webp',
         '/assets/1- MANEA_GACHBOWLI/7.webp',
         '/assets/1- MANEA_GACHBOWLI/8.webp',
+        '/assets/1- MANEA_GACHBOWLI/9.webp',
       ],
       location: 'Gachibowli, Hyderabad'
     },
