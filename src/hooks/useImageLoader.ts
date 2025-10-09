@@ -39,7 +39,7 @@ export const useImageLoader = ({
 
   useEffect(() => {
     loadImage();
-  }, [loadImage]);
+  }, [src, optimizedSrc, isPriority]);
 
   const handleLoad = useCallback(() => {
     setLoaded(true);
