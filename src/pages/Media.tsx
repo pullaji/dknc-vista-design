@@ -20,7 +20,7 @@ const Media = () => {
       publication: "Architectural Digest",
       date: "September 2021",
       type: "WEB",
-      mainImage: "/assets/Chennai Santhome/6.webp",
+      mainImage: "/assets/Chennai_Santhome/TITLE.webp",
       category: "Residential"
     },
     {
@@ -30,7 +30,7 @@ const Media = () => {
       publication: "ID HONOURS",
       date: "March 2021",
       type: "WEB",
-      mainImage: "/assets/2- PALLIATIVE CARE/1Title.webp",
+      mainImage: "/assets/2- PALLIATIVE CARE/1-TITLE.webp",
       category: "Awards"
     },
     {
@@ -40,7 +40,7 @@ const Media = () => {
       publication: "Archdaily",
       date: "April 2021",
       type: "WEB",
-      mainImage: "/assets/Chennai Santhome/2.webp",
+      mainImage: "/assets/Chennai_Santhome/2.webp",
       category: "Architecture"
     },
     {
@@ -50,7 +50,7 @@ const Media = () => {
       publication: "Archdaily",
       date: "July 2021",
       type: "WEB",
-      mainImage: "/assets/MANEA_MANIKONDA/Title.jpTitle.webp",
+      mainImage: "/assets/MANEA_MANIKONDA/1- TITLE.webp",
       category: "Commercial"
     },
     {
@@ -60,7 +60,7 @@ const Media = () => {
       publication: "Archdaily",
       date: "March 2021",
       type: "WEB",
-      mainImage: "/assets/PRACHI & RACHIT/Title.webp",
+      mainImage: "/assets/PRACHI_AND_RACHIT/TITLE.webp",
       category: "Podcast"
     },
     {
@@ -80,7 +80,7 @@ const Media = () => {
       publication: "Archdaily",
       date: "July 2020",
       type: "PRINT",
-      mainImage: "/assets/2- PALLIATIVE CARE/2 (2).webp",
+      mainImage: "/assets/2- PALLIATIVE CARE/2.webp",
       category: "Commercial"
     },
     {
@@ -90,7 +90,7 @@ const Media = () => {
       publication: "Design Pataki",
       date: "June 2021",
       type: "WEB",
-      mainImage: "/assets/Chennai Santhome/1.webp",
+      mainImage: "/assets/Chennai_Santhome/1.webp",
       category: "Residential"
     }
   ];
