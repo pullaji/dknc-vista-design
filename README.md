@@ -71,4 +71,66 @@ Yes, you can!
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+
+---
+
+## 🚀 Build Optimization Features
+
+This project includes enterprise-level optimization features:
+
+### ⚡ Performance Optimizations
+- **JavaScript:** Minified with Terser (75% size reduction with Brotli)
+- **CSS:** Minified and purged (86% size reduction with Brotli)
+- **HTML:** Minified and compressed
+- **Images:** WebP conversion (88% size reduction)
+- **Compression:** Gzip and Brotli support
+- **Code Splitting:** Automatic vendor chunk separation
+
+### 📦 Build Commands
+
+```bash
+# Development
+npm run dev                    # Start dev server
+
+# Production (Recommended)
+npm run build:prod            # Full optimization + image conversion
+
+# Standard build
+npm run build                 # Build with minification
+
+# Preview
+npm run preview               # Test production build locally
+```
+
+### 🖼️ Image Optimization
+
+```bash
+# Convert all images to WebP
+npm run batch-convert          # Quality 80 (default)
+npm run batch-convert 90       # Custom quality
+
+# Convert single image
+npm run convert-webp input.jpg output.webp 75
+```
+
+### 📚 Documentation
+
+For detailed information about optimizations:
+
+- **[QUICK_REFERENCE.md](QUICK_REFERENCE.md)** - Quick command reference
+- **[BUILD_OPTIMIZATION.md](BUILD_OPTIMIZATION.md)** - Complete build guide
+- **[WEBP_GUIDE.md](WEBP_GUIDE.md)** - Image optimization guide
+- **[CRITICAL_CSS_GUIDE.md](CRITICAL_CSS_GUIDE.md)** - Critical CSS extraction guide
+- **[OPTIMIZATION_RESULTS.md](OPTIMIZATION_RESULTS.md)** - Performance metrics
+
+### 🎯 Deployment Checklist
+
+Before deploying:
+1. Run `npm run build:prod` for full optimization
+2. Test with `npm run preview`
+3. Verify all assets load correctly
+4. Deploy the `dist/` folder
+
+---
+
 "# dknc-vista-design" 

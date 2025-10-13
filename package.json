@@ -5,10 +5,20 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && npm run minify:html && npm run optimize-scripts",
     "build:dev": "vite build --mode development",
+    "build:prod": "npm run batch-convert && vite build && npm run minify:html && npm run optimize-scripts",
+    "build:analyze": "vite build && npm run minify:html && npm run optimize-scripts",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "minify:html": "node scripts/post-build-optimize.js",
+    "minify:css": "cleancss -o dist/assets/style.min.css dist/assets/*.css",
+    "minify:js": "terser dist/assets/*.js -c -m -o dist/assets/bundle.min.js",
+    "critical-css": "node scripts/extract-critical-css.js",
+    "optimize-scripts": "node scripts/optimize-script-loading.js",
+    "convert-webp": "node scripts/convert-to-webp.js",
+    "batch-convert": "node scripts/batch-convert-webp.js",
+    "optimize-images": "imagemin \"public/assets/**/*.{jpg,png,JPG}\" --out-dir=dist/images --plugin=webp"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -63,15 +73,23 @@
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "autoprefixer": "^10.4.20",
+    "clean-css-cli": "^5.6.3",
+    "critical": "^7.2.1",
     "eslint": "^9.9.0",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "^15.9.0",
+    "html-minifier-terser": "^7.2.0",
+    "imagemin": "^9.0.1",
+    "imagemin-cli": "^8.0.0",
+    "imagemin-webp": "^8.0.0",
     "lovable-tagger": "^1.1.7",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.11",
+    "terser": "^5.44.0",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
-    "vite": "^5.4.1"
+    "vite": "^5.4.1",
+    "vite-plugin-compression": "^0.5.1"
   }
 }
