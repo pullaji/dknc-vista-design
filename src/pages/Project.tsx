@@ -80,9 +80,9 @@ const Project = () => {
         '/assets/MANEA_MANIKONDA/8.webp',
         '/assets/MANEA_MANIKONDA/9.webp',
         '/assets/MANEA_MANIKONDA/10.webp',
-        '/assets/MANEA_MANIKONDA/11.jpg.JPG',
-        '/assets/MANEA_MANIKONDA/12.jpg.jpg',
         '/assets/MANEA_MANIKONDA/13.webp',
+        '/assets/MANEA_MANIKONDA/12.jpg.jpg',
+        '/assets/MANEA_MANIKONDA/11.jpg.JPG',
         '/assets/MANEA_MANIKONDA/13.jpg.jpg',
         '/assets/MANEA_MANIKONDA/14.jpg.jpg',
       ],
@@ -148,7 +148,7 @@ const Project = () => {
                   src={projectImages[0]}
                   alt={project.title}
                   className={`w-full h-auto object-cover rounded-lg shadow-lg transition duration-300 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'}`}
-                  style={{ maxHeight: '80vh', contentVisibility: 'auto' }}
+                  style={{ maxHeight: '95vh', contentVisibility: 'auto', objectPosition: 'center 60%' }}
                   loading="eager"
                   {...{ fetchpriority: "high" }}
                   onLoad={() => setLoaded(true)}
