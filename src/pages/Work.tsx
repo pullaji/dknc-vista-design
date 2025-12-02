@@ -170,10 +170,25 @@ const Work = () => {
     },
     {
       id: 6,
-      title: 'Executive Office',
-      category: 'Urban',
-      image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop',
-      description: 'Sophisticated workspace design for modern business.'
+      title: 'New Project',
+      category: 'Architecture',
+      image: '/assets/new/title.webp',
+      description: 'A modern architectural project featuring contemporary design and innovative spaces.',
+      images: [
+        '/assets/new/title.webp',
+        '/assets/new/1.webp',
+        '/assets/new/2.webp',
+        '/assets/new/3.webp',
+        '/assets/new/4.webp',
+        '/assets/new/5.webp',
+        '/assets/new/6.webp',
+        '/assets/new/7.webp',
+        '/assets/new/8.webp',
+        '/assets/new/9.webp',
+      ],
+      location: 'Hyderabad',
+      year: '2024',
+      type: 'Residential Architecture'
     }
   ];
 
