@@ -1,4 +1,4 @@
-import { useParams, Navigate } from 'react-router-dom';
+     import { useParams, Navigate } from 'react-router-dom';
 import React, { useState } from 'react';
 
 const Project = () => {
@@ -182,7 +182,7 @@ const Project = () => {
           <div className="mb-16">
             {/* Second Row - 2 Images in Grid (3 for Project 3) */}
             {project.id === 3 ? (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 max-w-4xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 max-w-6xl mx-auto">
                 {projectImages.slice(1, 4).map((img, idx) => {
                   const [loaded, setLoaded] = useState(false);
                   const [error, setError] = useState(false);
@@ -216,7 +216,7 @@ const Project = () => {
                 })}
               </div>
             ) : (
-              <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 ${project.id === 3 ? 'max-w-4xl mx-auto' : ''}`}>
+              <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 ${project.id === 3 ? 'max-w-6xl mx-auto' : ''}`}>
                 {projectImages.slice(1, 3).map((img, idx) => {
                   const [loaded, setLoaded] = useState(false);
                   const [error, setError] = useState(false);
@@ -236,19 +236,25 @@ const Project = () => {
                       src={img}
                       alt={`${project.title} - Image ${idx + 2}`}
                       className={`w-full rounded-lg shadow-lg transition-all duration-500 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'} ${
-                        isProject4SecondImage || (isProject4 && idx === 1)
-                          ? 'h-[230px] lg:h-[350px] object-contain'
-                          : isProject4 
-                            ? 'h-64 lg:h-[230px] object-contain' 
-                            : project.id === 2 && idx === 1 
-                              ? 'h-96 lg:h-[300px] object-contain' 
-                              : project.id === 3
-                                ? 'h-[400px] lg:h-[500px] object-cover'
-                                : project.id === 5 && idx === 0
-                                  ? 'h-[300px] lg:h-[400px] object-cover'
-                                  : project.id === 5
-                                    ? 'h-64 lg:h-[400px] object-cover'
-                                    : 'h-96 lg:h-[400px] object-cover'
+                        isProject4SecondImage
+                          ? 'h-[500px] lg:h-[700px] object-cover'
+                          : (isProject4 && idx === 1)
+                            ? 'h-[500px] lg:h-[700px] object-cover'
+                            : isProject4 
+                              ? 'h-64 lg:h-[230px] object-contain' 
+                              : project.id === 2 && idx === 0
+                                ? 'h-64 lg:h-[400px] object-cover'
+                                : project.id === 2 && idx === 1 
+                                  ? 'h-64 lg:h-[400px] object-cover' 
+                                  : project.id === 3
+                                    ? 'h-[400px] lg:h-[500px] object-cover'
+                                    : project.id === 5 && idx === 0
+                                      ? 'h-[500px] lg:h-[700px] object-cover'
+                                      : project.id === 5 && idx === 1
+                                        ? 'h-[500px] lg:h-[700px] object-cover'
+                                        : project.id === 5
+                                          ? 'h-80 lg:h-[500px] object-cover'
+                                          : 'h-96 lg:h-[700px] object-cover'
                       }`}
                       loading="lazy"
                       decoding="async"
@@ -288,7 +294,7 @@ const Project = () => {
                         <img
                           src={img}
                           alt={`${project.title} - Image ${idx + 4}`}
-                          className={`w-full h-[230px] lg:h-[350px] rounded-lg shadow-lg object-contain transition-all duration-500 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'}`}
+                          className={`w-full h-[230px] lg:h-[350px] rounded-lg shadow-lg object-cover transition-all duration-500 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'}`}
                           loading="lazy"
                           decoding="async"
                           style={{ contentVisibility: 'auto' }}
@@ -300,14 +306,47 @@ const Project = () => {
                   })}
                           </div>
               ) : project.id === 5 ? (
-                /* Project 5: 2 Column Grid with 14.webp and 1.webp */
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                  {projectImages.slice(3, 5).map((img, idx) => {
+                /* Project 5: 2 Column Grid with 1.webp and 14.webp (interchanged) */
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                  {/* First image - wider (2 columns) */}
+                  {(() => {
                     const [loaded, setLoaded] = useState(false);
                     const [error, setError] = useState(false);
                     return (
                       <div 
-                        key={idx + 3} 
+                        key={4} 
+                        className="relative rounded-lg overflow-visible md:col-span-2"
+                      >
+                        {!loaded && !error && (
+                          <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-lg flex items-center justify-center">
+                            <div className="text-gray-400">Loading...</div>
+                          </div>
+                        )}
+                        <img
+                          src={projectImages[4]}
+                          alt={`${project.title} - Image 5`}
+                          className={`w-full h-[400px] lg:h-[500px] rounded-lg shadow-lg object-cover transition-all duration-500 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'}`}
+                          loading="lazy"
+                          decoding="async"
+                          style={{ contentVisibility: 'auto' }}
+                          onLoad={() => setLoaded(true)}
+                          onError={() => setError(true)}
+                        />
+                        {error && (
+                          <div className="w-full h-[400px] lg:h-[500px] bg-gray-100 rounded-lg flex items-center justify-center">
+                            <div className="text-gray-500">Image failed to load</div>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })()}
+                  {/* Second image - normal width (1 column) */}
+                  {(() => {
+                    const [loaded, setLoaded] = useState(false);
+                    const [error, setError] = useState(false);
+                    return (
+                      <div 
+                        key={3} 
                         className="relative rounded-lg overflow-visible"
                       >
                         {!loaded && !error && (
@@ -316,9 +355,9 @@ const Project = () => {
                           </div>
                         )}
                         <img
-                          src={img}
-                          alt={`${project.title} - Image ${idx + 4}`}
-                          className={`w-full h-[350px] lg:h-[450px] rounded-lg shadow-lg object-cover transition-all duration-500 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'}`}
+                          src={projectImages[3]}
+                          alt={`${project.title} - Image 4`}
+                          className={`w-full h-[400px] lg:h-[500px] rounded-lg shadow-lg object-cover transition-all duration-500 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'}`}
                           loading="lazy"
                           decoding="async"
                           style={{ contentVisibility: 'auto' }}
@@ -326,38 +365,105 @@ const Project = () => {
                           onError={() => setError(true)}
                         />
                         {error && (
-                          <div className="w-full h-[350px] lg:h-[450px] bg-gray-100 rounded-lg flex items-center justify-center">
+                          <div className="w-full h-[400px] lg:h-[500px] bg-gray-100 rounded-lg flex items-center justify-center">
                             <div className="text-gray-500">Image failed to load</div>
                           </div>
                         )}
                       </div>
                     );
-                  })}
+                  })()}
                 </div>
               ) : (
-                /* Other Projects: 2 Column Grid */
-              <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 ${project.id === 3 ? 'max-w-4xl mx-auto' : ''}`}>
-                {(project.id === 3 ? projectImages.slice(4, 6) : projectImages.slice(3, 5)).map((img, idx) => {
-                  const [loaded, setLoaded] = useState(false);
-                  const [error, setError] = useState(false);
-                  return (
-                    <div 
-                      key={project.id === 3 ? idx + 4 : idx + 3} 
-                      className={`relative rounded-lg ${project.id === 3 ? 'overflow-visible' : 'overflow-hidden'}`}
-                    >
-                      {!loaded && !error && (
-                        <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-lg flex items-center justify-center">
-                          <div className="text-gray-400">Loading...</div>
+                project.id === 3 ? (
+                  /* Project 3: 2 Column Grid with interchanged images */
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 max-w-6xl mx-auto">
+                    {/* First image - interchanged (was index 5, now first) */}
+                    {(() => {
+                      const [loaded, setLoaded] = useState(false);
+                      const [error, setError] = useState(false);
+                      return (
+                        <div 
+                          key={5} 
+                          className="relative rounded-lg overflow-visible"
+                        >
+                          {!loaded && !error && (
+                            <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-lg flex items-center justify-center">
+                              <div className="text-gray-400">Loading...</div>
+                            </div>
+                          )}
+                          <img
+                            src={projectImages[5]}
+                            alt={`${project.title} - Image 6`}
+                            className={`w-full rounded-lg shadow-lg transition-all duration-500 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'} h-[350px] lg:h-[450px] object-cover`}
+                            loading="lazy"
+                            decoding="async"
+                            style={{ contentVisibility: 'auto' }}
+                            onLoad={() => setLoaded(true)}
+                            onError={() => setError(true)}
+                          />
+                          {error && (
+                            <div className="w-full h-[350px] lg:h-[450px] bg-gray-100 rounded-lg flex items-center justify-center">
+                              <div className="text-gray-500">Image failed to load</div>
+                            </div>
+                          )}
                         </div>
-                      )}
-                      <img
-                        src={img}
-                        alt={`${project.title} - Image ${project.id === 3 ? idx + 5 : idx + 4}`}
-                          className={`w-full rounded-lg shadow-lg transition-all duration-500 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'} ${
-                            project.id === 2 && idx === 1 
-                              ? 'h-96 lg:h-[300px] object-contain' 
-                              : project.id === 3
-                                ? 'h-[350px] lg:h-[450px] object-cover'
+                      );
+                    })()}
+                    {/* Second image - interchanged (was index 4, now second) */}
+                    {(() => {
+                      const [loaded, setLoaded] = useState(false);
+                      const [error, setError] = useState(false);
+                      return (
+                        <div 
+                          key={4} 
+                          className="relative rounded-lg overflow-visible"
+                        >
+                          {!loaded && !error && (
+                            <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-lg flex items-center justify-center">
+                              <div className="text-gray-400">Loading...</div>
+                            </div>
+                          )}
+                          <img
+                            src={projectImages[4]}
+                            alt={`${project.title} - Image 5`}
+                            className={`w-full rounded-lg shadow-lg transition-all duration-500 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'} h-[350px] lg:h-[450px] object-cover`}
+                            loading="lazy"
+                            decoding="async"
+                            style={{ contentVisibility: 'auto' }}
+                            onLoad={() => setLoaded(true)}
+                            onError={() => setError(true)}
+                          />
+                          {error && (
+                            <div className="w-full h-[350px] lg:h-[450px] bg-gray-100 rounded-lg flex items-center justify-center">
+                              <div className="text-gray-500">Image failed to load</div>
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })()}
+                  </div>
+                ) : (
+                  /* Other Projects: 2 Column Grid */
+                  <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 mb-8`}>
+                    {projectImages.slice(3, 5).map((img, idx) => {
+                      const [loaded, setLoaded] = useState(false);
+                      const [error, setError] = useState(false);
+                      return (
+                        <div 
+                          key={idx + 3} 
+                          className="relative rounded-lg overflow-hidden"
+                        >
+                          {!loaded && !error && (
+                            <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-lg flex items-center justify-center">
+                              <div className="text-gray-400">Loading...</div>
+                            </div>
+                          )}
+                          <img
+                            src={img}
+                            alt={`${project.title} - Image ${idx + 4}`}
+                            className={`w-full rounded-lg shadow-lg transition-all duration-500 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'} ${
+                              project.id === 2 && idx === 1 
+                                ? 'h-96 lg:h-[300px] object-cover' 
                                 : project.id === 5 && idx === 0
                                   ? 'h-[350px] lg:h-[450px] object-cover'
                                   : project.id === 5 && idx === 1
@@ -365,22 +471,23 @@ const Project = () => {
                                     : project.id === 5
                                       ? 'h-64 lg:h-[400px] object-cover'
                                       : 'h-96 lg:h-[300px] object-cover'
-                          }`}
-                        loading="lazy"
-                        decoding="async"
-                        style={{ contentVisibility: 'auto' }}
-                        onLoad={() => setLoaded(true)}
-                        onError={() => setError(true)}
-                      />
-                      {error && (
-                        <div className="w-full h-96 lg:h-[500px] bg-gray-100 rounded-lg flex items-center justify-center">
-                          <div className="text-gray-500">Image failed to load</div>
+                            }`}
+                            loading="lazy"
+                            decoding="async"
+                            style={{ contentVisibility: 'auto' }}
+                            onLoad={() => setLoaded(true)}
+                            onError={() => setError(true)}
+                          />
+                          {error && (
+                            <div className="w-full h-96 lg:h-[500px] bg-gray-100 rounded-lg flex items-center justify-center">
+                              <div className="text-gray-500">Image failed to load</div>
+                            </div>
+                          )}
                         </div>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
+                      );
+                    })}
+                  </div>
+                )
               )
             )}
 
@@ -388,7 +495,7 @@ const Project = () => {
             {projectImages.length > 5 && (
               project.id === 3 ? (
                 /* Project 3: 2 Column Grid */
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 max-w-4xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 max-w-6xl mx-auto">
                   {projectImages.slice(6, 8).map((img, idx) => {
                     const [loaded, setLoaded] = useState(false);
                     const [error, setError] = useState(false);
@@ -441,7 +548,7 @@ const Project = () => {
                             src={projectImages[5]}
                             alt={`${project.title} - Image 6`}
                             className={`w-full rounded-lg shadow-lg transition-all duration-500 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'} ${
-                              isProject4 ? 'h-[230px] lg:h-[350px] object-contain' 
+                              isProject4 ? 'h-[500px] lg:h-[700px] object-cover' 
                               : project.id === 3 ? 'h-[400px] lg:h-[400px] object-cover'
                               : 'h-96 lg:h-[500px] object-cover'
                             }`}
@@ -514,7 +621,7 @@ const Project = () => {
                               <img
                                 src={projectImages[6]}
                                 alt={`${project.title} - Image 8`}
-                                className={`w-full h-[230px] lg:h-[350px] rounded-lg shadow-lg object-contain transition-all duration-500 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'}`}
+                                className={`w-full h-[500px] lg:h-[700px] rounded-lg shadow-lg object-cover transition-all duration-500 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'}`}
                                 loading="lazy"
                                 decoding="async"
                                 style={{ contentVisibility: 'auto' }}
@@ -543,7 +650,7 @@ const Project = () => {
                               <img
                                 src={projectImages[6]}
                                 alt={`${project.title} - Image 7`}
-                                className={`w-full h-[300px] lg:h-[400px] rounded-lg shadow-lg object-cover transition-all duration-500 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'}`}
+                                className={`w-full h-[500px] lg:h-[700px] rounded-lg shadow-lg object-cover transition-all duration-500 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'}`}
                                 style={{ contentVisibility: 'auto' }}
                                 loading="lazy"
                                 decoding="async"
@@ -650,9 +757,9 @@ const Project = () => {
                               src={isProject4 ? projectImages[7] : project.id === 5 ? projectImages[7] : projectImages[8]}
                               alt={`${project.title} - Image ${project.id === 5 ? '8' : '9'}`}
                               className={`w-full rounded-lg shadow-lg transition-all duration-500 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'} ${
-                                isProject4 ? 'h-[230px] lg:h-[350px] object-contain' 
+                                isProject4 ? 'h-[500px] lg:h-[700px] object-cover' 
                                 : project.id === 3 ? 'h-48 lg:h-[200px] object-contain'
-                                : project.id === 5 ? 'h-[300px] lg:h-[400px] object-cover'
+                                : project.id === 5 ? 'h-[500px] lg:h-[700px] object-cover'
                                 : 'h-96 lg:h-[500px] object-cover'
                               }`}
                               loading="lazy"
@@ -662,7 +769,9 @@ const Project = () => {
                               onError={() => setError(true)}
                             />
                             {error && !isProject4 && (
-                              <div className="w-full h-96 lg:h-[700px] bg-gray-100 rounded-lg flex items-center justify-center">
+                              <div className={`w-full bg-gray-100 rounded-lg flex items-center justify-center ${
+                                project.id === 5 ? 'h-[450px] lg:h-[400px]' : 'h-96 lg:h-[900px]'
+                              }`}>
                                 <div className="text-gray-500">Image failed to load</div>
                               </div>
                             )}
@@ -678,7 +787,7 @@ const Project = () => {
 
             {/* Fifth Row - Project 3: 2 Images */}
             {project.id === 3 && projectImages.length > 8 && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 max-w-4xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 max-w-6xl mx-auto">
                 {projectImages.slice(8, 10).map((img, idx) => {
                   const [loaded, setLoaded] = useState(false);
                   const [error, setError] = useState(false);
@@ -695,7 +804,7 @@ const Project = () => {
                       <img
                         src={img}
                         alt={`${project.title} - Image ${idx + 9}`}
-                        className={`w-full rounded-lg shadow-lg transition-all duration-500 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'} h-[350px] lg:h-[450px] object-cover`}
+                        className={`w-full rounded-lg shadow-lg transition-all duration-500 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'} h-[450px] lg:h-[550px] object-cover`}
                         loading="lazy"
                         decoding="async"
                         style={{ contentVisibility: 'auto' }}
@@ -703,7 +812,7 @@ const Project = () => {
                         onError={() => setError(true)}
                       />
                       {error && (
-                        <div className="w-full h-[350px] lg:h-[450px] bg-gray-100 rounded-lg flex items-center justify-center">
+                        <div className="w-full h-[450px] lg:h-[550px] bg-gray-100 rounded-lg flex items-center justify-center">
                           <div className="text-gray-500">Image failed to load</div>
                         </div>
                       )}
@@ -715,7 +824,7 @@ const Project = () => {
 
             {/* Sixth Row - Project 3: 2 Images */}
             {project.id === 3 && projectImages.length > 10 && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 max-w-4xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 max-w-6xl mx-auto">
                 {projectImages.slice(10, 12).map((img, idx) => {
                   const [loaded, setLoaded] = useState(false);
                   const [error, setError] = useState(false);
@@ -752,56 +861,182 @@ const Project = () => {
 
             {/* Fifth Row - Remaining Images (if any more than 9) */}
             {projectImages.length > 9 && project.id !== 3 && (
-              <div className={`grid gap-6 ${project.id === 4 ? 'grid-cols-1 md:grid-cols-2' : project.id === 5 ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4'}`}>
-                {(project.id === 4 ? projectImages.slice(9, 11) : project.id === 5 ? projectImages.slice(9, 11) : projectImages.slice(9)).map((img, idx) => {
-                  const [loaded, setLoaded] = useState(false);
-                  const [error, setError] = useState(false);
-                  const isProject4 = project.id === 4;
-                  return (
-                    <div 
-                      key={idx + 9} 
-                      className={`relative ${isProject4 || project.id === 5 ? 'overflow-visible' : ''}`}
-                    >
-                      {!loaded && !error && (
-                        <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-lg flex items-center justify-center">
-                          <div className="text-gray-400 text-xs">Loading...</div>
+              project.id === 5 ? (
+                /* Project 5: 3 column grid with 2nd image wider */
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {/* First image - normal width (1 column) */}
+                  {(() => {
+                    const [loaded, setLoaded] = useState(false);
+                    const [error, setError] = useState(false);
+                    return (
+                      <div 
+                        key={9} 
+                        className="relative overflow-visible"
+                      >
+                        {!loaded && !error && (
+                          <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-lg flex items-center justify-center">
+                            <div className="text-gray-400 text-xs">Loading...</div>
+                          </div>
+                        )}
+                        <img
+                          src={projectImages[9]}
+                          alt={`${project.title} - Image 10`}
+                          className={`w-full rounded-lg shadow-md transition duration-300 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'} h-80 md:h-96 object-cover`}
+                          loading="lazy"
+                          decoding="async"
+                          style={{ contentVisibility: 'auto' }}
+                          onLoad={() => setLoaded(true)}
+                          onError={() => setError(true)}
+                        />
+                        {error && (
+                          <div className="w-full h-80 md:h-96 bg-gray-100 rounded-lg flex items-center justify-center">
+                            <div className="text-gray-500 text-xs">Failed</div>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })()}
+                  {/* Second image - wider (2 columns) */}
+                  {(() => {
+                    const [loaded, setLoaded] = useState(false);
+                    const [error, setError] = useState(false);
+                    return (
+                      <div 
+                        key={10} 
+                        className="relative overflow-visible md:col-span-2"
+                      >
+                        {!loaded && !error && (
+                          <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-lg flex items-center justify-center">
+                            <div className="text-gray-400 text-xs">Loading...</div>
+                          </div>
+                        )}
+                        <img
+                          src={projectImages[10]}
+                          alt={`${project.title} - Image 11`}
+                          className={`w-full rounded-lg shadow-md transition duration-300 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'} h-80 md:h-96 object-cover`}
+                          loading="lazy"
+                          decoding="async"
+                          style={{ contentVisibility: 'auto' }}
+                          onLoad={() => setLoaded(true)}
+                          onError={() => setError(true)}
+                        />
+                        {error && (
+                          <div className="w-full h-80 md:h-96 bg-gray-100 rounded-lg flex items-center justify-center">
+                            <div className="text-gray-500 text-xs">Failed</div>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })()}
+                </div>
+              ) : (
+                project.id === 4 ? (
+                  /* Project 4: 3 column grid with 1st image wider */
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {/* First image - wider (2 columns) */}
+                    {(() => {
+                      const [loaded, setLoaded] = useState(false);
+                      const [error, setError] = useState(false);
+                      return (
+                        <div 
+                          key={9} 
+                          className="relative overflow-visible md:col-span-2"
+                        >
+                          {!loaded && !error && (
+                            <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-lg flex items-center justify-center">
+                              <div className="text-gray-400 text-xs">Loading...</div>
+                            </div>
+                          )}
+                          <img
+                            src={projectImages[9]}
+                            alt={`${project.title} - Image 10`}
+                            className={`w-full rounded-lg shadow-md transition duration-300 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'} h-48 md:h-56 object-cover`}
+                            loading="lazy"
+                            decoding="async"
+                            style={{ contentVisibility: 'auto' }}
+                            onLoad={() => setLoaded(true)}
+                            onError={() => setError(true)}
+                          />
                         </div>
-                      )}
-                      <img
-                        src={img}
-                        alt={`${project.title} - Image ${idx + 10}`}
-                        className={`w-full rounded-lg shadow-md transition duration-300 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'} ${
-                          isProject4 ? 'h-48 md:h-56 object-contain' 
-                          : project.id === 5 ? 'h-80 md:h-96 object-cover'
-                          : 'h-64 md:h-72 object-cover'
-                        }`}
-                        loading="lazy"
-                        decoding="async"
-                        style={{ contentVisibility: 'auto' }}
-                        onLoad={() => setLoaded(true)}
-                        onError={() => setError(true)}
-                      />
-                      {error && !isProject4 && (
-                        <div className="w-full h-64 md:h-72 bg-gray-100 rounded-lg flex items-center justify-center">
-                          <div className="text-gray-500 text-xs">Failed</div>
+                      );
+                    })()}
+                    {/* Second image - normal width (1 column) */}
+                    {(() => {
+                      const [loaded, setLoaded] = useState(false);
+                      const [error, setError] = useState(false);
+                      return (
+                        <div 
+                          key={10} 
+                          className="relative overflow-visible"
+                        >
+                          {!loaded && !error && (
+                            <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-lg flex items-center justify-center">
+                              <div className="text-gray-400 text-xs">Loading...</div>
+                            </div>
+                          )}
+                          <img
+                            src={projectImages[10]}
+                            alt={`${project.title} - Image 11`}
+                            className={`w-full rounded-lg shadow-md transition duration-300 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'} h-48 md:h-56 object-cover`}
+                            loading="lazy"
+                            decoding="async"
+                            style={{ contentVisibility: 'auto' }}
+                            onLoad={() => setLoaded(true)}
+                            onError={() => setError(true)}
+                          />
                         </div>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
+                      );
+                    })()}
+                  </div>
+                ) : (
+                  <div className={`grid gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4`}>
+                    {projectImages.slice(9).map((img, idx) => {
+                      const [loaded, setLoaded] = useState(false);
+                      const [error, setError] = useState(false);
+                      return (
+                        <div 
+                          key={idx + 9} 
+                          className="relative"
+                        >
+                          {!loaded && !error && (
+                            <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-lg flex items-center justify-center">
+                              <div className="text-gray-400 text-xs">Loading...</div>
+                            </div>
+                          )}
+                          <img
+                            src={img}
+                            alt={`${project.title} - Image ${idx + 10}`}
+                            className={`w-full rounded-lg shadow-md transition duration-300 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'} h-64 md:h-72 object-cover`}
+                            loading="lazy"
+                            decoding="async"
+                            style={{ contentVisibility: 'auto' }}
+                            onLoad={() => setLoaded(true)}
+                            onError={() => setError(true)}
+                          />
+                          {error && (
+                            <div className="w-full h-64 md:h-72 bg-gray-100 rounded-lg flex items-center justify-center">
+                              <div className="text-gray-500 text-xs">Failed</div>
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )
+              )
             )}
 
             {/* Sixth Row - Project 5: 2 Images */}
             {project.id === 5 && projectImages.length > 11 && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 mt-10">
-                {[projectImages[0], projectImages[11]].map((img, idx) => {
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 mt-10">
+                {/* First image - wider (2 columns) */}
+                {(() => {
                   const [loaded, setLoaded] = useState(false);
                   const [error, setError] = useState(false);
                   return (
                     <div 
-                      key={idx} 
-                      className="relative rounded-lg overflow-visible"
+                      key={0} 
+                      className="relative rounded-lg overflow-visible md:col-span-2"
                     >
                       {!loaded && !error && (
                         <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-lg flex items-center justify-center">
@@ -809,8 +1044,8 @@ const Project = () => {
                         </div>
                       )}
                       <img
-                        src={img}
-                        alt={`${project.title} - Image ${idx + 12}`}
+                        src={projectImages[0]}
+                        alt={`${project.title} - Image 12`}
                         className={`w-full h-[350px] lg:h-[450px] rounded-lg shadow-lg object-cover transition-all duration-500 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'}`}
                         loading="lazy"
                         decoding="async"
@@ -825,7 +1060,39 @@ const Project = () => {
                       )}
                     </div>
                   );
-                })}
+                })()}
+                {/* Second image - normal width (1 column) */}
+                {(() => {
+                  const [loaded, setLoaded] = useState(false);
+                  const [error, setError] = useState(false);
+                  return (
+                    <div 
+                      key={1} 
+                      className="relative rounded-lg overflow-visible"
+                    >
+                      {!loaded && !error && (
+                        <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-lg flex items-center justify-center">
+                          <div className="text-gray-400">Loading...</div>
+                        </div>
+                      )}
+                      <img
+                        src={projectImages[11]}
+                        alt={`${project.title} - Image 13`}
+                        className={`w-full h-[350px] lg:h-[450px] rounded-lg shadow-lg object-cover transition-all duration-500 ease-in-out ${loaded ? 'opacity-100' : 'opacity-0'}`}
+                        loading="lazy"
+                        decoding="async"
+                        style={{ contentVisibility: 'auto' }}
+                        onLoad={() => setLoaded(true)}
+                        onError={() => setError(true)}
+                      />
+                      {error && (
+                        <div className="w-full h-[350px] lg:h-[450px] bg-gray-100 rounded-lg flex items-center justify-center">
+                          <div className="text-gray-500">Image failed to load</div>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })()}
               </div>
             )}
 
